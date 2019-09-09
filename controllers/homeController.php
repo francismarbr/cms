@@ -15,11 +15,9 @@ class homeController extends Controller {
         $dados = array();
 
         $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $empresa = new Empresa($usuario->getEmpresa());
-        $dados['nome_empresa'] = $empresa->getNome();
+        $usuario->setUsuarioLogado(); //busca o usuário logado para pegar suas informações
         $dados['nome_usuario'] = $usuario->getNome();
-
+        
         $this->carregarTemplate('home', $dados);
     }
 }

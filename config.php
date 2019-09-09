@@ -17,10 +17,10 @@
         $config['dbsenha'] = "";
     }
 
-    global $conexaodb;
+    global $conexaoBaseDados;
 
     try {
-        $conexaodb = new PDO("mysql:dbname=".$config['dbname'].";host=".$config['host'], $config['dbusuario'], $config['dbsenha']);
+        $conexaoBaseDados = new PDO("mysql:dbname=".$config['dbname'].";host=".$config['host'], $config['dbusuario'], $config['dbsenha']);
     } catch (PDOException $e) {
         echo "Erro ao conectar. ".$e->getMessage();
     }

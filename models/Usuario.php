@@ -21,7 +21,7 @@ class Usuario extends Model {
         if($sql->rowCount() > 0) {
             $resultado = $sql->fetch();
 
-            $_SESSION['ccUsuario'] = $resultado['id'];
+            $_SESSION['ccUsuario'] = $resultado['id']; //salva na sessão id do usuário
             
             return true;
         } else {
@@ -40,7 +40,7 @@ class Usuario extends Model {
             if($sql->rowCount() > 0) {
                 $this->infoUsuario = $sql->fetch();
                 $this->permissoes = new Permissao();
-                $this->permissoes->setGrupo($this->infoUsuario['grupo'], $this->infoUsuario['empresa_id']);
+                $this->permissoes->setGrupo($this->infoUsuario['grupo_id'], $this->infoUsuario['empresa_id']);
             }
         }
     }
@@ -59,6 +59,20 @@ class Usuario extends Model {
 
     public function getNome() {
         return $this->infoUsuario['nome'];
+    }
+
+    //verifica se um determinado grupo está vinculado a algum usuário
+    public function procurarGrupoNoUsuario($id_grupo) {
+        $sql = "SELECT * FROM usuario WHERE grupo_id = :id_grupo";
+        $sql = $this->conexaodb->prepare($sql);
+        $sql->bindValue(':id_grupo', $id_grupo);
+        $sql->execute();
+
+        if($sql->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
 }

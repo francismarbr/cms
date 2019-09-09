@@ -4,7 +4,7 @@ class Empresa extends Model {
     private $infoEmpresa;
 
     public function __construct($id) {
-        parent::__construct();
+        parent::__construct(); //roda o construtor da classe model
        
         $sql = $this->conexaodb->prepare("SELECT * FROM empresa WHERE id = :id");
         $sql->bindValue(':id', $id);
