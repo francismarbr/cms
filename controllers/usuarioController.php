@@ -52,7 +52,7 @@ class usuarioController extends Controller {
         $usuario->setUsuarioLogado();
         $dados['nome_usuario'] = $usuario->getNome();
 
-        if($usuario->temPermissao('gerenciar_permissao')) {
+        if($usuario->temPermissao('gerenciar_usuarios')) {
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
                 $nome = addslashes($_POST['nome']);
                 $email = addslashes($_POST['email']);
