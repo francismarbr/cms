@@ -15,7 +15,7 @@ class permissaoController extends Controller {
         $usuario->setUsuarioLogado();
         $dados['nome_usuario'] = $usuario->getNome();
 
-        if($usuario->temPermissao('gerenciar_permissao')) {
+        if($usuario->temPermissao('gerenciar_permissoes')) {
             $permissao = new Permissao();
             $dados['lista_permissoes'] = $permissao->getListaPermissoes(); 
 
@@ -31,7 +31,7 @@ class permissaoController extends Controller {
         $usuario->setUsuarioLogado();
         $dados['nome_usuario'] = $usuario->getNome();
 
-        if($usuario->temPermissao('gerenciar_permissao')) {
+        if($usuario->temPermissao('gerenciar_permissoes')) {
             $permissao = new Permissao(); 
 
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
@@ -52,7 +52,7 @@ class permissaoController extends Controller {
         $usuario->setUsuarioLogado();
         $dados['nome_usuario'] = $usuario->getNome();
 
-        if($usuario->temPermissao('gerenciar_permissao')) {
+        if($usuario->temPermissao('gerenciar_permissoes')) {
             $permissao = new Permissao(); 
 
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
@@ -75,7 +75,7 @@ class permissaoController extends Controller {
         $usuario->setUsuarioLogado();
         $dados['nome_usuario'] = $usuario->getNome();
 
-        if($usuario->temPermissao('gerenciar_permissao')) {
+        if($usuario->temPermissao('gerenciar_permissoes')) {
             $permissao = new Permissao();
 
             $permissao->excluir($id_permissao);

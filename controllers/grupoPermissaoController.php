@@ -15,7 +15,7 @@ class grupoPermissaoController extends Controller {
         $usuario->setUsuarioLogado();
         $dados['nome_usuario'] = $usuario->getNome();
 
-        if($usuario->temPermissao('gerenciar_grupo_permissao')) {
+        if($usuario->temPermissao('gerenciar_grupos_permissao')) {
             $grupoPermissao = new GrupoPermissao();
             $dados['lista_grupos'] = $grupoPermissao->getListaGrupos(); 
 
@@ -31,7 +31,7 @@ class grupoPermissaoController extends Controller {
         $usuario->setUsuarioLogado();
         $dados['nome_usuario'] = $usuario->getNome();
 
-        if($usuario->temPermissao('gerenciar_grupo_permissao')) {
+        if($usuario->temPermissao('gerenciar_grupos_permissao')) {
             $grupoPermissao = new GrupoPermissao (); 
 
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
@@ -57,7 +57,7 @@ class grupoPermissaoController extends Controller {
         $usuario->setUsuarioLogado();
         $dados['nome_usuario'] = $usuario->getNome();
 
-        if($usuario->temPermissao('gerenciar_grupo_permissao')) {
+        if($usuario->temPermissao('gerenciar_grupos_permissao')) {
             $grupoPermissao = new GrupoPermissao (); 
 
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
@@ -83,7 +83,7 @@ class grupoPermissaoController extends Controller {
         $usuario->setUsuarioLogado();
         $dados['nome_usuario'] = $usuario->getNome();
 
-        if($usuario->temPermissao('gerenciar_grupo_permissao')) {
+        if($usuario->temPermissao('gerenciar_grupos_permissao')) {
             $grupoPermissao = new grupoPermissao();
             
             $grupoPermissao->excluir($id_grupo);
