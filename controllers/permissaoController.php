@@ -18,7 +18,6 @@ class permissaoController extends Controller {
         if($usuario->temPermissao('gerenciar_permissoes')) {
             $permissao = new Permissao();
             $dados['lista_permissoes'] = $permissao->getListaPermissoes(); 
-
             $this->carregarTemplate('permissao', $dados);
         } else {
             header("Location: ".BASE_URL);
@@ -39,7 +38,7 @@ class permissaoController extends Controller {
                 $permissao->inserir($nome_permissao);
                 header("Location: ".BASE_URL."/permissao");
             }
-
+            $dados['info_permissao'] = array(); //permite que a variável info_permissao exista na view, mas não carrega nenhuma informação 
             $this->carregarTemplate('cadastrarPermissao', $dados);
         } else {
             header("Location: ".BASE_URL);
@@ -80,8 +79,6 @@ class permissaoController extends Controller {
 
             $permissao->excluir($id_permissao);
             header("Location: ".BASE_URL."/permissao");
-
-            $this->carregarTemplate('cadastrarPermissao', $dados);
         } else {
             header("Location: ".BASE_URL);
         }

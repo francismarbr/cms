@@ -44,7 +44,7 @@ class grupoPermissaoController extends Controller {
             $permissao = new Permissao();
             //busca todas as permissões disponíveis para serem usadas na view cadastrar
             $dados['lista_permissoes'] = $permissao->getListaPermissoes();
-              
+            $dados['info_grupo'] = array(); //permite que a variável info_grupo exista na view, mas não carrega nenhuma informação 
             $this->carregarTemplate('cadastrarGrupoPermissao', $dados);
         } else {
             header("Location: ".BASE_URL);
@@ -89,8 +89,6 @@ class grupoPermissaoController extends Controller {
             $grupoPermissao->excluir($id_grupo);
             
             header("Location: ".BASE_URL."/grupoPermissao");
-
-            $this->carregarTemplate('cadastrar-permissao', $dados);
         } else {
             header("Location: ".BASE_URL);
         }

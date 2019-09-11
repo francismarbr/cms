@@ -253,6 +253,7 @@ desired effect
           <ul class="treeview-menu">
             <li><a href="<?php echo BASE_URL; ?>/grupoPermissao">Grupos de Permissões</a></li>
             <li><a href="<?php echo BASE_URL; ?>/permissao">Permissões</a></li>
+            <li><a href="<?php echo BASE_URL; ?>/usuario">Usuários</a></li>
           </ul>
         </li>
       </ul>
