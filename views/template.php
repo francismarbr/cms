@@ -243,7 +243,7 @@ desired effect
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-        <li><a href="<?php echo BASE_URL; ?>/permissao"><i class="fa fa-link"></i> <span>Permissões</span></a></li>
+        <li><a href="<?php echo BASE_URL; ?>/cliente"><i class="fa fa-link"></i> <span>Clientes</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Configurações</span>
             <span class="pull-right-container">
