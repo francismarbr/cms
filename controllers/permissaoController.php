@@ -4,7 +4,7 @@ class permissaoController extends Controller {
         $usuario = new Usuario();
         //se o usuário não estiver logado, redireciona para login
         if($usuario->isLogado() == false) {
-            header("Location: ".BASE_URL."/login");
+            header("Location: ".BASE_URL."/painel-adm/login");
             exit;
         }
     }
@@ -18,7 +18,7 @@ class permissaoController extends Controller {
         if($usuario->temPermissao('gerenciar_permissoes')) {
             $permissao = new Permissao();
             $dados['lista_permissoes'] = $permissao->getListaPermissoes(); 
-            $this->carregarTemplate('permissao', $dados);
+            $this->carregarTemplateEmAdmin('painel-adm/permissao', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -36,10 +36,10 @@ class permissaoController extends Controller {
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
                 $nome_permissao = addslashes($_POST['nome']);
                 $permissao->inserir($nome_permissao);
-                header("Location: ".BASE_URL."/permissao");
+                header("Location: ".BASE_URL."/painel-adm/permissao");
             }
             $dados['info_permissao'] = array(); //permite que a variável info_permissao exista na view, mas não carrega nenhuma informação 
-            $this->carregarTemplate('cadastrarPermissao', $dados);
+            $this->carregarTemplateEmAdmin('painel-adm/cadastrarPermissao', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -57,12 +57,12 @@ class permissaoController extends Controller {
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
                 $nome_permissao = addslashes($_POST['nome']);
                 $permissao->editar($id, $nome_permissao);
-                header("Location: ".BASE_URL."/permissao");
+                header("Location: ".BASE_URL."/painel-adm/permissao");
             }
 
             $dados['info_permissao'] = $permissao->getPermissao($id);
 
-            $this->carregarTemplate('cadastrarPermissao', $dados);
+            $this->carregarTemplateEmAdmin('painel-adm/cadastrarPermissao', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -78,7 +78,7 @@ class permissaoController extends Controller {
             $permissao = new Permissao();
 
             $permissao->excluir($id_permissao);
-            header("Location: ".BASE_URL."/permissao");
+            header("Location: ".BASE_URL."/painel-adm/permissao");
         } else {
             header("Location: ".BASE_URL);
         }

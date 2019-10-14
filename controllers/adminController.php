@@ -1,12 +1,12 @@
 <?php
-class homeController extends Controller {
+class adminController extends Controller {
 
     public function __construct() {
        
         $usuario = new Usuario();
         //se o usuário não estiver logado, redireciona para login
         if($usuario->isLogado() == false) {
-            header("Location: ".BASE_URL."/login");
+            header("Location: ".BASE_URL."/painel-adm/login");
             exit;
         }
     }
@@ -18,6 +18,6 @@ class homeController extends Controller {
         $usuario->setUsuarioLogado(); //busca o usuário logado para pegar suas informações
         $dados['nome_usuario'] = $usuario->getNome();
         
-        $this->carregarTemplate('home', $dados);
+        $this->carregarTemplateEmAdmin('painel-adm/dashboard', $dados);
     }
 }

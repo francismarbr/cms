@@ -3,10 +3,8 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Clientes</h3>
-                    <?php if($add_cliente) : ?>
-                    <a href="<?php echo BASE_URL; ?>/cliente/inserir/" class="btn btn-primary pull-right" >Novo Cliente</a>
-                    <?php endif; ?>
+                    <h3 class="box-title">Usuários</h3>
+                    <a href="<?php echo BASE_URL; ?>/painel-adm/usuario/inserir/" class="btn btn-primary pull-right" >Novo Usuário</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
@@ -15,19 +13,21 @@
                             <th>ID</th>
                             <th>Nome</th>
                             <th>E-mail</th>
-                            <th>Telefone</th>
+                            <th>Login</th>
+                            <th>Grupo de Permissão</th>
                             <th>Ação</th>
                         </tr>
-                        <?php foreach($lista_clientes as $cliente): ?>
+                        <?php foreach($lista_usuarios as $usuario): ?>
                         <tr>
-                            <td><?php echo $cliente['id']; ?></td>
-                            <td><?php echo $cliente['nome']; ?></td>
-                            <td><?php echo $cliente['email']; ?></td>
-                            <td><?php echo $cliente['telefone']; ?></td>
+                            <td><?php echo $usuario['id']; ?></td>
+                            <td><?php echo $usuario['nome']; ?></td>
+                            <td><?php echo $usuario['email']; ?></td>
+                            <td><?php echo $usuario['login']; ?></td>
+                            <td><?php echo $usuario['grupo_permissao']; ?></td>
                             <td>
-                              <a href="<?php echo BASE_URL; ?>/cliente/editar/<?php echo $cliente['id']; ?>" class="btn btn-info" 
+                              <a href="<?php echo BASE_URL; ?>/painel-adm/usuario/editar/<?php echo $usuario['id']; ?>" class="btn btn-info" 
                                   >Editar</a>
-                              <a href="<?php echo BASE_URL; ?>/cliente/excluir/<?php echo $cliente['id']; ?>" class="btn btn-danger" 
+                              <a href="<?php echo BASE_URL; ?>/painel-adm/usuario/excluir/<?php echo $usuario['id']; ?>" class="btn btn-danger" 
                                   onclick="return confirm('Deseja realmente excluir este registro?')">Excluir</a>
                             </td>
                         </tr>

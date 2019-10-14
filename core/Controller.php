@@ -8,11 +8,19 @@ class Controller {
 
     public function carregarTemplate($nomeView, $dadosView = array()) {
         extract($dadosView);
-        require 'views/template.php';
+        require 'views/templates/template.php';
     }
-
+    
     public function carregarViewNoTemplate($nomeView, $dadosView = array()) {
         extract($dadosView);
         require 'views/'.$nomeView.'.php';
     }
+
+    public function carregarTemplateEmAdmin($nomeView, $dadosView = array()) {
+        extract($dadosView);
+        require 'views/admin.php';
+    }
+
+
+    
 }

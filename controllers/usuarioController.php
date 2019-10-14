@@ -4,7 +4,7 @@ class usuarioController extends Controller {
         $usuario = new Usuario();
         //se o usuário não estiver logado, redireciona para login
         if($usuario->isLogado() == false) {
-            header("Location: ".BASE_URL."/login");
+            header("Location: ".BASE_URL."/painel-adm/login");
             exit;
         }
     }
@@ -17,7 +17,7 @@ class usuarioController extends Controller {
 
         if($usuario->temPermissao('gerenciar_usuarios')) {
             $dados['lista_usuarios'] = $usuario->getListaUsuarios(); 
-            $this->carregarTemplate('usuario', $dados);
+            $this->carregarTemplateEmAdmin('painel-adm/usuario', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -44,13 +44,13 @@ class usuarioController extends Controller {
                 } elseif($retorno == '3'){
                     $dados['msg_informativa'] = "O login que você escolheu já existe.";
                 } else {
-                    header("Location: ".BASE_URL."/usuario");
+                    header("Location: ".BASE_URL."/painel-adm/usuario");
                 }  
             }
             $grupoPermissao = new GrupoPermissao();
             $dados['lista_grupos'] = $grupoPermissao->getListaGrupos();
             $dados['info_usuario'] = array();
-            $this->carregarTemplate('cadastrarUsuario', $dados);
+            $this->carregarTemplateEmAdmin('painel-adm/cadastrarUsuario', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -74,7 +74,7 @@ class usuarioController extends Controller {
                 if($retorno == '0'){
                     $dados['msg_informativa'] = "O login que você escolheu já existe.";
                 } else {
-                    header("Location: ".BASE_URL."/usuario");
+                    header("Location: ".BASE_URL."/painel-adm/usuario");
                 } 
             }
             
@@ -82,7 +82,7 @@ class usuarioController extends Controller {
             $dados['lista_grupos'] = $grupoPermissao->getListaGrupos();
             $dados['info_usuario'] = $usuario->getInformacoes($id);
 
-            $this->carregarTemplate('cadastrarUsuario', $dados);
+            $this->carregarTemplateEmAdmin('painel-adm/cadastrarUsuario', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -96,7 +96,7 @@ class usuarioController extends Controller {
 
         if($usuario->temPermissao('gerenciar_usuarios')) {
             $usuario->excluir($id_usuario);
-            header("Location: ".BASE_URL."/usuario");
+            header("Location: ".BASE_URL."/painel-adm/usuario");
         } else {
             header("Location: ".BASE_URL);
         }
