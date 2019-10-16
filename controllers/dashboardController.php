@@ -1,5 +1,5 @@
 <?php
-class homeController extends Controller {
+class dashboardController extends Controller {
 
     public function __construct() {
        

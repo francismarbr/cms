@@ -245,6 +245,17 @@ desired effect
         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
         <li><a href="<?php echo BASE_URL; ?>/painel-adm/cliente"><i class="fa fa-link"></i> <span>Clientes</span></a></li>
         <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>Conteúdo</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo BASE_URL; ?>/painel-adm/pagina">Páginas e Posts</a></li>
+            <li><a href="<?php echo BASE_URL; ?>/painel-adm/categoria">Categorias</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Configurações</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>

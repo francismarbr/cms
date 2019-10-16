@@ -10,7 +10,7 @@ class Permissao extends Model {
             $sql->bindValue(":nome", $nome_permissao);
             $sql->execute();
         } catch(PDOException $e) {
-            echo "Não foi possível inserir permissão! ".$e->getMessage();
+            echo "Não foi possível inserir permissão! ".$e->getMessage(); exit;
         }
     }
 
