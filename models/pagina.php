@@ -2,51 +2,50 @@
 class Pagina extends Model {
 
    
-    public function inserir($titulo, $data, $imagem, $conteudo, $autor, $tags, $palavra_chave, $alt_imagem_capa, $descricao, $url, $views, $tipo) {
+    public function inserir($titulo, $data, $imagem, $conteudo, $alt_imagem_capa, $descricao, $url, $views, $tipo, $id_categoria) {
         try {
-            $sql = "INSERT INTO pagina SET titulo = :titulo, data = :data, imagem = :imagem, conteudo = :conteudo, autor = :autor, tags = :tags, ";
-            $sql .= "palavra_chave = :palavra_chave, alt_imagem_capa = :alt_imagem_capa, descricao = :descricao, url = :url, views = :views, tipo = :tipo";
+            $sql = "INSERT INTO pagina SET titulo = :titulo, data = :data, imagem = :imagem, conteudo = :conteudo, ";
+            $sql .= "alt_imagem_capa = :alt_imagem_capa, descricao = :descricao, url = :url, views = :views, tipo = :tipo, id_categoria = :id_categoria";
             $sql = $this->conexaodb->prepare($sql);
             $sql->bindValue(":titulo", $titulo);
             $sql->bindValue(":data", $data);
             $sql->bindValue(":imagem", $imagem);
             $sql->bindValue(":conteudo", $conteudo);
-            $sql->bindValue(":autor", $autor);
-            $sql->bindValue(":tags", $tags);
-            $sql->bindValue(":palavra_chave", $palavra_chave);
             $sql->bindValue(":alt_imagem_capa", $alt_imagem_capa);
             $sql->bindValue(":descricao", $descricao);
             $sql->bindValue(":url", $url);
             $sql->bindValue(":views", $views);
             $sql->bindValue(":tipo", $tipo);
+            $sql->bindValue(":id_categoria", $id_categoria);
             $sql->execute();
         } catch(PDOException $e) {
             echo "Não foi possível inserir página! ".$e->getMessage(); exit;
         }
     }
-
-    public function editar($id, $titulo, $data, $imagem, $conteudo, $autor, $tags, $palavra_chave, $alt_imagem_capa, $descricao, $url, $views, $tipo) {
+            
+    public function editar($id, $titulo, $imagem, $conteudo, $alt_imagem_capa, $descricao, $url, $tipo, $id_categoria) {
         try {
-            $sql = "INSERT INTO pagina SET titulo = :titulo, data = :data, imagem = :imagem, conteudo = :conteudo, autor = :autor, tags = :tags, ";
-            $sql .= "palavra_chave = :palavra_chave, alt_imagem_capa = :alt_imagem_capa, descricao = :descricao, url = :url, views = :views, tipo = :tipo ";
-            $sql .= "WHERE id = :id";
+            $sql = "UPDATE pagina SET titulo = :titulo, conteudo = :conteudo, ";
+            $sql .= "alt_imagem_capa = :alt_imagem_capa, descricao = :descricao, url = :url, tipo = :tipo, id_categoria = :id_categoria";
+            if(!empty($imagem)) {
+                $sql .= ", imagem = :imagem";
+            }
+            $sql .= " WHERE id = :id";
             $sql = $this->conexaodb->prepare($sql);
             $sql->bindValue(":id", $id);
             $sql->bindValue(":titulo", $titulo);
-            $sql->bindValue(":data", $data);
-            $sql->bindValue(":imagem", $imagem);
+            if(!empty($imagem)) {
+                $sql->bindValue(":imagem", $imagem);
+            }
             $sql->bindValue(":conteudo", $conteudo);
-            $sql->bindValue(":autor", $autor);
-            $sql->bindValue(":tags", $tags);
-            $sql->bindValue(":palavra_chave", $palavra_chave);
             $sql->bindValue(":alt_imagem_capa", $alt_imagem_capa);
             $sql->bindValue(":descricao", $descricao);
             $sql->bindValue(":url", $url);
-            $sql->bindValue(":views", $views);
             $sql->bindValue(":tipo", $tipo);
+            $sql->bindValue(":id_categoria", $id_categoria);
             $sql->execute();
         } catch(PDOException $e) {
-            echo "Não foi possível atualizar esta página! ".$e->getMessage();
+            echo "Não foi possível atualizar esta página! ".$e->getMessage(); exit;
         }
     }
 
@@ -79,8 +78,14 @@ class Pagina extends Model {
     public function getListaPaginas($tipo) {
         $resultado = array();
 
-        $sql = $this->conexaodb->prepare('SELECT * FROM pagina WHERE tipo = :tipo');
-        $sql->bindValue(':tipo', $tipo);
+        $sql = "SELECT * FROM pagina";
+        if(!empty($tipo)) {
+            $sql .=" WHERE tipo = :tipo'";
+        }
+        $sql = $this->conexaodb->prepare($sql);
+        if(!empty($tipo)) {
+            $sql->bindValue(':tipo', $tipo);
+        }
         $sql->execute();
 
         if($sql->rowCount() > 0) {

@@ -30,26 +30,7 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -240,33 +221,18 @@ desired effect
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">HEADER</li>
+        <li class="header">PÁGINAS E POSTS</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+        <li><a href="<?php echo BASE_URL; ?>/painel-adm/pagina"><i class="fa fa-link"></i> <span>Páginas e Posts</span></a></li>
+        <li><a href="<?php echo BASE_URL; ?>/painel-adm/categoria"><i class="fa fa-link"></i> <span>Categorias</span></a></li>
+        
         <li><a href="<?php echo BASE_URL; ?>/painel-adm/cliente"><i class="fa fa-link"></i> <span>Clientes</span></a></li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Conteúdo</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo BASE_URL; ?>/painel-adm/pagina">Páginas e Posts</a></li>
-            <li><a href="<?php echo BASE_URL; ?>/painel-adm/categoria">Categorias</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Configurações</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo BASE_URL; ?>/painel-adm/grupoPermissao">Grupos de Permissões</a></li>
-            <li><a href="<?php echo BASE_URL; ?>/painel-adm/permissao">Permissões</a></li>
-            <li><a href="<?php echo BASE_URL; ?>/painel-adm/usuario">Usuários</a></li>
-          </ul>
-        </li>
+        
+        <li class="header">CONTEÚDO</li>
+        <li><a href="<?php echo BASE_URL; ?>/painel-adm/grupoPermissao"><i class="fa fa-link"></i> <span>Grupos de Permissões</span></a></li>
+        <li><a href="<?php echo BASE_URL; ?>/painel-adm/permissao"><i class="fa fa-link"></i> <span>Permissões</span></a></li>
+        <li><a href="<?php echo BASE_URL; ?>/painel-adm/usuario"><i class="fa fa-link"></i> <span>Usuários</span></a></li>
+        
       </ul>
       <!-- /.sidebar-menu -->
     </section>

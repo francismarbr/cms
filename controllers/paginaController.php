@@ -17,7 +17,8 @@ class paginaController extends Controller {
 
         if($usuario->temPermissao('consultar_pagina')) {
             $pagina = new Pagina();
-            $dados['lista_paginas'] = $pagina->getListaPaginas($tipo = ""); 
+            $dados['lista_paginas'] = $pagina->getListaPaginas($tipo = "");
+            
             $this->carregarTemplateEmAdmin('painel-adm/pagina', $dados);
         } else {
             header("Location: ".BASE_URL);
@@ -29,29 +30,29 @@ class paginaController extends Controller {
         $usuario = new Usuario();
         $usuario->setUsuarioLogado();
         $dados['nome_usuario'] = $usuario->getNome();
+        
 
         if($usuario->temPermissao('gerenciar_pagina')) {
-            $pagina = new Pagina(); 
+            $pagina = new Pagina();
+            $categoria = new Categoria(); 
 
             if(isset($_POST['titulo']) && !empty($_POST['titulo'])){
                 $titulo = addslashes($_POST['titulo']);
-                $data = addslashes($_POST['data']);
-                $imagem = addslashes($_POST['imagem']);
+                $data = date('d/m/y');
+                $imagem_capa = addslashes($_POST['imagem_capa']);
                 $conteudo = addslashes($_POST['conteudo']);
-                $autor = addslashes($_POST['autor']);
-                $tags = addslashes($_POST['tags']);
-                $palavra_chave = addslashes($_POST['palavra_chave']);
                 $alt_imagem_capa = addslashes($_POST['alt_imagem_capa']);
                 $descricao = addslashes($_POST['descricao']);
                 $url = addslashes($_POST['url']);
-                $views = addslashes($_POST['views']);
+                $views = 0;
                 $tipo = addslashes($_POST['tipo']);
-
-                $pagina->inserir($titulo, $data, $imagem, $conteudo, $autor, $tags, $palavra_chave, $alt_imagem_capa, $descricao, $url, $views, $tipo);
+                $id_categoria = $_POST['categoria'];
+                $pagina->inserir($titulo, $data, $imagem_capa, $conteudo, $alt_imagem_capa, $descricao, $url, $views, $tipo, $id_categoria);
 
                 header("Location: ".BASE_URL."/painel-adm/pagina");
             }
             $dados['info_pagina'] = array(); //permite que a variável info_permissao exista na view, mas não carrega nenhuma informação 
+            $dados['lista_categorias'] = $categoria->getListaCategorias(); 
             $this->carregarTemplateEmAdmin('painel-adm/cadastrarPagina', $dados);
         } else {
             header("Location: ".BASE_URL);
@@ -63,33 +64,29 @@ class paginaController extends Controller {
         $usuario = new Usuario();
         $usuario->setUsuarioLogado();
         $dados['nome_usuario'] = $usuario->getNome();
+        
 
         if($usuario->temPermissao('gerenciar_pagina')) {
-            $permissao = new Permissao(); 
+            $pagina = new Pagina();
+            $categoria = new Categoria(); 
 
-            if(isset($_POST['id']) && !empty($_POST['id'])){
-                $id_pagina = addslashes($_POST['id']);
+            if(isset($_POST['titulo']) && !empty($_POST['titulo'])){
                 $titulo = addslashes($_POST['titulo']);
-                $data = addslashes($_POST['data']);
-                $imagem = addslashes($_POST['imagem']);
+                $imagem_capa = addslashes($_POST['imagem_capa']);
                 $conteudo = addslashes($_POST['conteudo']);
-                $autor = addslashes($_POST['autor']);
-                $tags = addslashes($_POST['tags']);
-                $palavra_chave = addslashes($_POST['palavra_chave']);
                 $alt_imagem_capa = addslashes($_POST['alt_imagem_capa']);
                 $descricao = addslashes($_POST['descricao']);
                 $url = addslashes($_POST['url']);
-                $views = addslashes($_POST['views']);
                 $tipo = addslashes($_POST['tipo']);
-                
-                $pagina->editar($id_pagina, $titulo, $data, $imagem, $conteudo, $autor, $tags, $palavra_chave, $alt_imagem_capa, $descricao, $url, $views, $tipo);
+                $id_categoria = $_POST['categoria'];
+                $pagina->editar($id, $titulo, $imagem_capa, $conteudo, $alt_imagem_capa, $descricao, $url, $tipo, $id_categoria);
                 
                 header("Location: ".BASE_URL."/painel-adm/pagina");
             }
 
             $dados['info_pagina'] = $pagina->getPagina($id);
-
-            $this->carregarTemplateEmAdmin('painel-adm/cadastrarPermissao', $dados);
+            $dados['lista_categorias'] = $categoria->getListaCategorias(); 
+            $this->carregarTemplateEmAdmin('painel-adm/cadastrarPagina', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
