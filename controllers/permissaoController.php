@@ -18,7 +18,7 @@ class permissaoController extends Controller {
         if($usuario->temPermissao('gerenciar_permissoes')) {
             $permissao = new Permissao();
             $dados['lista_permissoes'] = $permissao->getListaPermissoes(); 
-            $this->carregarTemplateEmAdmin('permissao', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/permissao', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -39,7 +39,7 @@ class permissaoController extends Controller {
                 header("Location: ".BASE_URL."/permissao");
             }
             $dados['info_permissao'] = array(); //permite que a variável info_permissao exista na view, mas não carrega nenhuma informação 
-            $this->carregarTemplateEmAdmin('forms/formPermissao', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formPermissao', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -62,7 +62,7 @@ class permissaoController extends Controller {
 
             $dados['info_permissao'] = $permissao->getPermissao($id);
 
-            $this->carregarTemplateEmAdmin('forms/formPermissao', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formPermissao', $dados);
         } else {
             header("Location: ".BASE_URL);
         }

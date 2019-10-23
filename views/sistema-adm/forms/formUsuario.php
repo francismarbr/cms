@@ -56,12 +56,12 @@
 
                 <div class="row">
                   <div class="col-xs-6">
-                    <label>Grupo de Permissões</label>
-                    <select class="form-control" name="grupo">
-                      <option value="">Selecione um grupo</option>
-                    <?php foreach($lista_grupos as $grupo): ?>
-                      <option value="<?php echo $grupo['id']; ?>" <?php if(isset($info_usuario['grupo_id']) && $grupo['id']==$info_usuario['grupo_id']): ?> selected="selected" <?php endif; ?> >
-                      <?php echo $grupo['nome']; ?>
+                    <label>Perfil de Acesso</label>
+                    <select class="form-control" name="perfil">
+                      <option value="">Selecione um perfil</option>
+                    <?php foreach($lista_perfis as $perfil): ?>
+                      <option value="<?php echo $perfil['id']; ?>" <?php if(isset($info_usuario['perfil_acesso_id']) && $perfil['id']==$info_usuario['perfil_acesso_id']): ?> selected="selected" <?php endif; ?> >
+                      <?php echo $perfil['nome']; ?>
                       </option>
                     <?php endforeach; ?>
                     </select>

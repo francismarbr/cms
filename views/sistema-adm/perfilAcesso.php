@@ -3,26 +3,26 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Grupos de Permissão</h3>
+                    <h3 class="box-title">Perfis de Acesso</h3>
 
-                    <a href="<?php echo BASE_URL; ?>/painel-adm/grupoPermissao/inserir/" class="btn btn-primary pull-right" >Novo Grupo</a>
+                    <a href="<?php echo BASE_URL; ?>/perfilAcesso/inserir/" class="btn btn-primary pull-right" >Novo Perfil</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tr>
                             <th>ID</th>
-                            <th>Grupo de Permissão</th>
+                            <th>Perfil de Acesso</th>
                             <th>Ação</th>
                         </tr>
-                        <?php foreach($lista_grupos as $grupo): ?>
+                        <?php foreach($lista_perfis as $perfil): ?>
                         <tr>
-                            <td><?php echo $grupo['id']; ?></td>
-                            <td><?php echo $grupo['nome']; ?></td>
-                            <td><a href="<?php echo BASE_URL; ?>/painel-adm/grupoPermissao/editar/<?php echo $grupo['id']; ?>" class="btn btn-info" 
+                            <td><?php echo $perfil['id']; ?></td>
+                            <td><?php echo $perfil['nome']; ?></td>
+                            <td><a href="<?php echo BASE_URL; ?>/perfilAcesso/editar/<?php echo $perfil['id']; ?>" class="btn btn-info" 
                                    >Editar</a>
                                   
-                                  <a href="<?php echo BASE_URL; ?>/painel-adm/grupoPermissao/excluir/<?php echo $grupo['id']; ?>" class="btn btn-danger" 
+                                  <a href="<?php echo BASE_URL; ?>/perfilAcesso/excluir/<?php echo $perfil['id']; ?>" class="btn btn-danger" 
                                   onclick="return confirm('Deseja realmente excluir este registro?')">Excluir</a>
                             </td>
                         </tr>

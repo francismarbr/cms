@@ -5,7 +5,7 @@
                 <div class="box-header">
                     <h3 class="box-title">Permissões</h3>
 
-                    <a href="<?php echo BASE_URL; ?>/painel-adm/permissao/inserir/" class="btn btn-primary pull-right" >Nova Permissão</a>
+                    <a href="<?php echo BASE_URL; ?>/permissao/inserir/" class="btn btn-primary pull-right" >Nova Permissão</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
@@ -20,9 +20,9 @@
                             <td><?php echo $permissao['id']; ?></td>
                             <td><?php echo $permissao['nome']; ?></td>
                             <td>
-                              <a href="<?php echo BASE_URL; ?>/painel-adm/permissao/editar/<?php echo $permissao['id']; ?>" class="btn btn-info" 
+                              <a href="<?php echo BASE_URL; ?>/permissao/editar/<?php echo $permissao['id']; ?>" class="btn btn-info" 
                                     >Editar</a>
-                              <a href="<?php echo BASE_URL; ?>/painel-adm/permissao/excluir/<?php echo $permissao['id']; ?>" class="btn btn-danger" 
+                              <a href="<?php echo BASE_URL; ?>/permissao/excluir/<?php echo $permissao['id']; ?>" class="btn btn-danger" 
                                       onclick="return confirm('Deseja realmente excluir este registro?')">Excluir</a>
                             </td>
                         </tr>

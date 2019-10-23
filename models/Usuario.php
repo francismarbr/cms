@@ -4,7 +4,7 @@ class Usuario extends Model {
     private $infoUsuario;
     private $permissoes;
 
-    public function inserir($nome, $email, $login, $senha, $grupo_permissao) {
+    public function inserir($nome, $email, $login, $senha, $perfil_acesso) {
         try {
 
             $sqlVerificaEmail = $this->conexaodb->prepare("SELECT * FROM usuario WHERE email = :email");
@@ -18,13 +18,13 @@ class Usuario extends Model {
             //só insere um novo usuário se o login e o email não existirem no banco vinculado a outro usuário
             if( !($sqlVerificaEmail->rowCount() > 0) && !($sqlVerificaLogin->rowCount() > 0) ) {
                 $sql = "INSERT INTO usuario SET nome = :nome, email = :email, ";
-                $sql .= "login = :login, senha = :senha, grupo_id = :grupo_permissao";
+                $sql .= "login = :login, senha = :senha, perfil_acesso_id = :perfil_acesso";
                 $sql = $this->conexaodb->prepare($sql);
                 $sql->bindValue(':nome', $nome);
                 $sql->bindValue(':email', $email);
                 $sql->bindValue(':login', $login);
                 $sql->bindValue(':senha', md5($senha));
-                $sql->bindValue(':grupo_permissao', $grupo_permissao);
+                $sql->bindValue(':perfil_acesso', $perfil_acesso);
             
                 if($sql->execute()){
                     return '1';
@@ -44,7 +44,7 @@ class Usuario extends Model {
         }
     }
 
-    public function editar($id, $nome, $login, $senha, $grupo_permissao) {
+    public function editar($id, $nome, $login, $senha, $perfil_acesso) {
         try {
 
             $sqlVerificaLogin = $this->conexaodb->prepare("SELECT * FROM usuario WHERE login = :login AND id <> :id");
@@ -54,7 +54,7 @@ class Usuario extends Model {
 
             //só atualiza o usuário se o login não existir no banco vinculado a outro usuário
             if(  !($sqlVerificaLogin->rowCount() > 0) ) {
-                $sql = "UPDATE usuario SET nome = :nome, login = :login, grupo_id = :grupo_permissao";
+                $sql = "UPDATE usuario SET nome = :nome, login = :login, perfil_acesso_id = :perfil_acesso";
                 //se a senha não foi alterada na edição, evita que seja salva uma senha em branco no banco
                 if(!empty($senha)) {
                     $sql .= ", senha = :senha";
@@ -67,7 +67,7 @@ class Usuario extends Model {
                 if(!empty($senha)) {
                     $sql->bindValue(':senha', md5($senha));
                 }
-                $sql->bindValue(':grupo_permissao', $grupo_permissao);
+                $sql->bindValue(':perfil_acesso', $perfil_acesso);
             
                 if($sql->execute()){
                     return '1';
@@ -128,7 +128,7 @@ class Usuario extends Model {
             if($sql->rowCount() > 0) {
                 $this->infoUsuario = $sql->fetch();
                 $this->permissoes = new Permissao();
-                $this->permissoes->setGrupo($this->infoUsuario['grupo_id']);
+                $this->permissoes->setPerfilAcesso($this->infoUsuario['perfil_acesso_id']);
             }
         }
     }
@@ -167,11 +167,11 @@ class Usuario extends Model {
         return $resultado;
     }
 
-    //verifica se um determinado grupo está vinculado a algum usuário
-    public function procurarGrupoNoUsuario($id_grupo) {
-        $sql = "SELECT * FROM usuario WHERE grupo_id = :id_grupo";
+    //verifica se um determinado perfil está vinculado a algum usuário
+    public function procurarPerfilNoUsuario($id_perfil) {
+        $sql = "SELECT * FROM usuario WHERE perfil_acesso_id = :id_perfil";
         $sql = $this->conexaodb->prepare($sql);
-        $sql->bindValue(':id_grupo', $id_grupo);
+        $sql->bindValue(':id_perfil', $id_perfil);
         $sql->execute();
 
         if($sql->rowCount() > 0) {
@@ -190,9 +190,9 @@ class Usuario extends Model {
                 usuario.nome, 
                 usuario.email, 
                 usuario.login, 
-                grupo_permissao.nome as grupo_permissao
+                perfil_acesso.nome as perfil_acesso
                 FROM usuario
-                LEFT JOIN grupo_permissao ON grupo_permissao.id = usuario.grupo_id";
+                LEFT JOIN perfil_acesso ON perfil_acesso.id = usuario.perfil_acesso_id";
             $sql = $this->conexaodb->prepare($sql);
             $sql->execute();
 

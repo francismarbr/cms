@@ -5,7 +5,7 @@
                 <div class="box-header">
                     <h3 class="box-title">Categorias</h3>
 
-                    <a href="<?php echo BASE_URL; ?>/painel-adm/categoria/inserir/" class="btn btn-primary pull-right" >Nova Categoria</a>
+                    <a href="<?php echo BASE_URL; ?>/categoria/inserir/" class="btn btn-primary pull-right" >Nova Categoria</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">

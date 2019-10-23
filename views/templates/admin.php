@@ -17,14 +17,14 @@
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/adminlte/dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/adminlte/dist/css/skins/skin-blue-light.min.css">
 
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue-light sidebar-mini">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -182,19 +182,51 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">CONTEÚDO</li>
-        <!-- Optionally, you can add icons to the links -->
-        <li><a href="<?php echo BASE_URL; ?>/pagina"><i class="fa fa-link"></i> <span>Páginas e Posts</span></a></li>
-        <li><a href="<?php echo BASE_URL; ?>/categoria"><i class="fa fa-link"></i> <span>Categorias</span></a></li>
         
-        <li><a href="<?php echo BASE_URL; ?>/cliente"><i class="fa fa-link"></i> <span>Clientes</span></a></li>
-        
-        <li class="header">CONFIGURAÇÕES</li>
-        <li><a href="<?php echo BASE_URL; ?>/grupoPermissao"><i class="fa fa-link"></i> <span>Grupos de Permissões</span></a></li>
-        <li><a href="<?php echo BASE_URL; ?>/permissao"><i class="fa fa-link"></i> <span>Permissões</span></a></li>
-        <li><a href="<?php echo BASE_URL; ?>/usuario"><i class="fa fa-link"></i> <span>Usuários</span></a></li>
-        
+        <li>
+          <a href="<?php echo BASE_URL; ?>/dashboard">
+            <i class="fa fa-dashboard"></i> <span>DASHBOARD</span>
+          </a>
+        </li>
+
+        <li class="header">MÓDULO CMS</li>
+
+        <li class="treeview">
+            <a href="#">
+              <i class="fa fa-pie-chart"></i>
+              <span>Conteúdo</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="active"><a href="<?php echo BASE_URL; ?>/pagina"><i class="fa fa-link"></i> <span>Páginas e Posts</span></a></li>
+              <li><a href="<?php echo BASE_URL; ?>/categoria"><i class="fa fa-link"></i> <span>Categorias</span></a></li>
+            </ul>
+          </li>
+
+          <li>
+          <a href="<?php echo BASE_URL; ?>/dashboard">
+            <i class="fa fa-dashboard"></i> <span>Mídia</span>
+          </a>
+        </li>
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-laptop"></i>
+              <span>Configurações</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="<?php echo BASE_URL; ?>/perfilAcesso"><i class="fa fa-link"></i> Perfis de Acesso</a></li>
+              <li><a href="<?php echo BASE_URL; ?>/permissao"><i class="fa fa-link"></i>Permissões</a></li>
+              <li><a href="<?php echo BASE_URL; ?>/usuario"><i class="fa fa-link"></i> Usuários</a></li>
+            </ul>
+          </li>
       </ul>
+
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
@@ -202,17 +234,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Page Header
-        <small>Optional description</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
-      </ol>
-    </section>
+    
 
     <!-- Main content -->
     <section class="content container-fluid">

@@ -1,14 +1,14 @@
 <?php
-class GrupoPermissao extends Model {
+class PerfilAcesso extends Model {
 
-    private $grupo;
+    private $perfil;
     private $permissoes;
 
-    public function inserir($nome_permissao, $lista_permissoes) {
+    public function inserir($nome_perfil, $lista_permissoes) {
         try {
             $permissoes = implode(',', $lista_permissoes); //separa por vírgula os elementos do array
-            $sql = $this->conexaodb->prepare("INSERT INTO grupo_permissao SET nome = :nome, permissoes = :permissoes");
-            $sql->bindValue(":nome", $nome_permissao);
+            $sql = $this->conexaodb->prepare("INSERT INTO perfil_acesso SET nome = :nome, permissoes = :permissoes");
+            $sql->bindValue(":nome", $nome_perfil);
             $sql->bindValue(":permissoes", $permissoes);
             $sql->execute();
         } catch(PDOException $e) {
@@ -16,26 +16,26 @@ class GrupoPermissao extends Model {
         }
     }
 
-    public function editar($id, $nome_permissao, $lista_permissoes) {
+    public function editar($id, $nome_perfil, $lista_permissoes) {
         try {
             $permissoes = implode(',', $lista_permissoes); //separa por vírgula os elementos do array
-            $sql = $this->conexaodb->prepare("UPDATE grupo_permissao SET nome = :nome, permissoes = :permissoes WHERE id = :id");
+            $sql = $this->conexaodb->prepare("UPDATE perfil_acesso SET nome = :nome, permissoes = :permissoes WHERE id = :id");
             $sql->bindValue(":id", $id);
-            $sql->bindValue(":nome", $nome_permissao);
+            $sql->bindValue(":nome", $nome_perfil);
             $sql->bindValue(":permissoes", $permissoes);
             $sql->execute();
         } catch(PDOException $e) {
-            echo "Não foi possível editar esse grupo! ".$e->getMessage();
+            echo "Não foi possível editar esse perfil! ".$e->getMessage();
         }
     }
 
-    public function excluir($id_grupo) {
+    public function excluir($id_perfil) {
         try {
             $usuario = new Usuario();
-            //verifica se o grupo a ser excluído está vinculado a algum usuário
-            if($usuario->procurarGrupoNoUsuario($id_grupo) == false) {
-                $sql = $this->conexaodb->prepare("DELETE FROM grupo_permissao WHERE id = :id");
-                $sql->bindValue(":id", $id_grupo);
+            //verifica se o perfil a ser excluído está vinculado a algum usuário
+            if($usuario->procurarPerfilNoUsuario($id_perfil) == false) {
+                $sql = $this->conexaodb->prepare("DELETE FROM perfil_acesso WHERE id = :id");
+                $sql->bindValue(":id", $id_perfil);
                 $sql->execute();
             }
         } catch(PDOException $e) {
@@ -52,10 +52,10 @@ class GrupoPermissao extends Model {
         }
     }
 
-    public function getListaGrupos() {
+    public function getListaPerfisAcesso() {
         $resultado = array();
 
-        $sql = $this->conexaodb->prepare('SELECT * FROM grupo_permissao');
+        $sql = $this->conexaodb->prepare('SELECT * FROM perfil_acesso');
         $sql->execute();
 
         if($sql->rowCount() > 0) {
@@ -66,14 +66,14 @@ class GrupoPermissao extends Model {
     }
 
     /*** 
-     * recebe o id do grupo de acesso do usuário logado e 
+     * recebe o id do perfil de acesso do usuário logado e 
      * lista todas as permissões que ele tem
     */
-    public function setGrupo($id) {
-        $this->grupo = $id;
+    public function setPerfilAcesso($id) {
+        $this->perfil = $id;
         $this->permissoes = array();
 
-        $sql = $this->conexaodb->prepare("SELECT permissoes FROM grupo_permissao WHERE id = :id");
+        $sql = $this->conexaodb->prepare("SELECT permissoes FROM perfil_acesso WHERE id = :id");
         $sql->bindValue(':id', $id);
         $sql->execute();
 
@@ -84,9 +84,9 @@ class GrupoPermissao extends Model {
                 $resultado['permissoes'] ='0';
             }
             
-            $permissoesGrupo = $resultado['permissoes'];
+            $permissoesPerfil = $resultado['permissoes'];
 
-            $sql = $this->conexaodb->prepare("SELECT nome FROM permissao WHERE id IN ($permissoesGrupo)");
+            $sql = $this->conexaodb->prepare("SELECT nome FROM permissao WHERE id IN ($permissoesPerfil)");
             $sql->execute();
 
             if($sql->rowCount() > 0) {
@@ -98,11 +98,11 @@ class GrupoPermissao extends Model {
 
     }
 
-    public function getGrupo($id_grupo) {
+    public function getPerfilAcesso($id_perfil) {
         $resultado = array();
         try{
-            $sql = $this->conexaodb->prepare('SELECT * FROM grupo_permissao WHERE id = :id');
-            $sql->bindValue(':id', $id_grupo);
+            $sql = $this->conexaodb->prepare('SELECT * FROM perfil_acesso WHERE id = :id');
+            $sql->bindValue(':id', $id_perfil);
             $sql->execute();
 
             if($sql->rowCount() > 0) {
@@ -110,7 +110,7 @@ class GrupoPermissao extends Model {
                 $resultado['permissoes'] = explode(',', $resultado['permissoes']); //transforma a string em parâmetros
             }
         } catch(PDOException $e) {
-            echo "Não foi possível buscar grupo selecionado! ".$e->getMessage();
+            echo "Não foi possível buscar perfil selecionado! ".$e->getMessage();
         }
 
         return $resultado;

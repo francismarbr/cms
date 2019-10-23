@@ -4,7 +4,7 @@ class usuarioController extends Controller {
         $usuario = new Usuario();
         //se o usuário não estiver logado, redireciona para login
         if($usuario->isLogado() == false) {
-            header("Location: ".BASE_URL."/painel-adm/login");
+            header("Location: ".BASE_URL."/login");
             exit;
         }
     }
@@ -17,7 +17,7 @@ class usuarioController extends Controller {
 
         if($usuario->temPermissao('gerenciar_usuarios')) {
             $dados['lista_usuarios'] = $usuario->getListaUsuarios(); 
-            $this->carregarTemplateEmAdmin('usuario', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/usuario', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -35,9 +35,9 @@ class usuarioController extends Controller {
                 $email = addslashes($_POST['email']);
                 $login = addslashes($_POST['login']);
                 $senha = addslashes($_POST['senha']);
-                $grupo_permissao = addslashes($_POST['grupo']);
+                $perfil_acesso = addslashes($_POST['perfil']);
 
-                $retorno = $usuario->inserir($nome, $email, $login, $senha, $grupo_permissao);
+                $retorno = $usuario->inserir($nome, $email, $login, $senha, $perfil_acesso);
                
                 if($retorno == '2') {
                     $dados['msg_informativa'] = "O email que você digitou já existe.";
@@ -47,10 +47,10 @@ class usuarioController extends Controller {
                     header("Location: ".BASE_URL."/usuario");
                 }  
             }
-            $grupoPermissao = new GrupoPermissao();
-            $dados['lista_grupos'] = $grupoPermissao->getListaGrupos();
+            $perfilAcesso = new PerfilAcesso();
+            $dados['lista_perfis'] = $perfilAcesso->getListaPerfisAcesso();
             $dados['info_usuario'] = array();
-            $this->carregarTemplateEmAdmin('forms/formUsuario', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formUsuario', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -67,9 +67,9 @@ class usuarioController extends Controller {
                 $nome = addslashes($_POST['nome']);
                 $login = addslashes($_POST['login']);
                 $senha = addslashes($_POST['senha']);
-                $grupo_permissao = addslashes($_POST['grupo']);
+                $perfil_acesso = addslashes($_POST['perfil']);
                 
-                $retorno = $usuario->editar($id, $nome, $login, $senha, $grupo_permissao);
+                $retorno = $usuario->editar($id, $nome, $login, $senha, $perfil_acesso);
 
                 if($retorno == '0'){
                     $dados['msg_informativa'] = "O login que você escolheu já existe.";
@@ -78,11 +78,11 @@ class usuarioController extends Controller {
                 } 
             }
             
-            $grupoPermissao = new GrupoPermissao();
-            $dados['lista_grupos'] = $grupoPermissao->getListaGrupos();
+            $perfilAcesso = new PerfilAcesso();
+            $dados['lista_perfis'] = $perfilAcesso->getListaPerfisAcesso();
             $dados['info_usuario'] = $usuario->getInformacoes($id);
 
-            $this->carregarTemplateEmAdmin('forms/formUsuario', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formUsuario', $dados);
         } else {
             header("Location: ".BASE_URL);
         }

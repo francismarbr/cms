@@ -1,7 +1,7 @@
 <?php
 class Permissao extends Model {
 
-    private $grupo;
+    private $perfi;
     private $permissoes;
 
     public function inserir($nome_permissao) {
@@ -61,14 +61,14 @@ class Permissao extends Model {
     }
 
     /*** 
-     * recebe o id do grupo de acesso do usuário logado e 
+     * recebe o id do perfil de acesso do usuário logado e 
      * lista todas as permissões que ele tem
     */
-    public function setGrupo($id) {
-        $this->grupo = $id;
+    public function setPerfilAcesso($id) {
+        $this->perfil = $id;
         $this->permissoes = array();
 
-        $sql = $this->conexaodb->prepare("SELECT permissoes FROM grupo_permissao WHERE id = :id");
+        $sql = $this->conexaodb->prepare("SELECT permissoes FROM perfil_acesso WHERE id = :id");
         $sql->bindValue(':id', $id);
         $sql->execute();
 
@@ -79,9 +79,9 @@ class Permissao extends Model {
                 $resultado['permissoes'] ='0';
             }
             
-            $permissoesGrupo = $resultado['permissoes'];
+            $permissoesPerfil = $resultado['permissoes'];
 
-            $sql = $this->conexaodb->prepare("SELECT nome FROM permissao WHERE id IN ($permissoesGrupo)");
+            $sql = $this->conexaodb->prepare("SELECT nome FROM permissao WHERE id IN ($permissoesPerfil)");
             $sql->execute();
 
             if($sql->rowCount() > 0) {

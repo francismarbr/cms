@@ -1,5 +1,5 @@
 <?php
-class categoriaController extends Controller {
+class CategoriaController extends Controller {
     public function __construct() {
         $usuario = new Usuario();
         //se o usuário não estiver logado, redireciona para login
@@ -18,7 +18,7 @@ class categoriaController extends Controller {
         if($usuario->temPermissao('gerenciar_categorias')) {
             $categoria = new Categoria();
             $dados['lista_categorias'] = $categoria->getListaCategorias(); 
-            $this->carregarTemplateEmAdmin('categoria', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/categoria', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -39,7 +39,7 @@ class categoriaController extends Controller {
                 header("Location: ".BASE_URL."/categoria");
             }
             $dados['info_categoria'] = array(); //permite que a variável info_categoria exista na view, mas não carrega nenhuma informação 
-            $this->carregarTemplateEmAdmin('forms/formCategoria', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formCategoria', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -62,7 +62,7 @@ class categoriaController extends Controller {
 
             $dados['info_categoria'] = $categoria->getCategoria($id);
 
-            $this->carregarTemplateEmAdmin('forms/formCategoria', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formCategoria', $dados);
         } else {
             header("Location: ".BASE_URL);
         }

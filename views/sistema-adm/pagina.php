@@ -5,7 +5,7 @@
                 <div class="box-header">
                     <h3 class="box-title">Páginas e Posts</h3>
 
-                    <a href="<?php echo BASE_URL; ?>/painel-adm/pagina/inserir/" class="btn btn-primary pull-right" >Nova Página</a>
+                    <a href="<?php echo BASE_URL; ?>/pagina/inserir/" class="btn btn-primary pull-right" >Nova Página</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
@@ -20,9 +20,9 @@
                             <td><?php echo $pagina['id']; ?></td>
                             <td><?php echo $pagina['titulo']; ?></td>
                             <td>
-                              <a href="<?php echo BASE_URL; ?>/painel-adm/pagina/editar/<?php echo $pagina['id']; ?>" class="btn btn-info" 
+                              <a href="<?php echo BASE_URL; ?>/pagina/editar/<?php echo $pagina['id']; ?>" class="btn btn-info" 
                                     >Editar</a>
-                              <a href="<?php echo BASE_URL; ?>/painel-adm/pagina/excluir/<?php echo $pagina['id']; ?>" class="btn btn-danger" 
+                              <a href="<?php echo BASE_URL; ?>/pagina/excluir/<?php echo $pagina['id']; ?>" class="btn btn-danger" 
                                       onclick="return confirm('Deseja realmente excluir este registro?')">Excluir</a>
                             </td>
                         </tr>

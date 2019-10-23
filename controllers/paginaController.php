@@ -1,5 +1,5 @@
 <?php
-class paginaController extends Controller {
+class PaginaController extends Controller {
     public function __construct() {
         $usuario = new Usuario();
         //se o usuário não estiver logado, redireciona para login
@@ -19,9 +19,9 @@ class paginaController extends Controller {
             $pagina = new Pagina();
             $dados['lista_paginas'] = $pagina->getListaPaginas($tipo = "");
             
-            $this->carregarTemplateEmAdmin('pagina', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/pagina', $dados);
         } else {
-            header("Location: ".BASE_URL);
+            header("Location: ".BASE_URL."/dashboard");
         }
     }
 
@@ -53,7 +53,7 @@ class paginaController extends Controller {
             }
             $dados['info_pagina'] = array(); //permite que a variável info_permissao exista na view, mas não carrega nenhuma informação 
             $dados['lista_categorias'] = $categoria->getListaCategorias(); 
-            $this->carregarTemplateEmAdmin('forms/formPagina', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formPagina', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -86,7 +86,7 @@ class paginaController extends Controller {
 
             $dados['info_pagina'] = $pagina->getPagina($id);
             $dados['lista_categorias'] = $categoria->getListaCategorias(); 
-            $this->carregarTemplateEmAdmin('forms/formPagina', $dados);
+            $this->carregarTemplateEmAdmin('/sistema-adm/forms/formPagina', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
