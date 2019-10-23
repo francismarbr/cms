@@ -4,7 +4,7 @@ class clienteController extends Controller {
         $usuario = new Usuario();
         //se o usuário não estiver logado, redireciona para login
         if($usuario->isLogado() == false) {
-            header("Location: ".BASE_URL."/painel-adm/login");
+            header("Location: ".BASE_URL."/login");
             exit;
         }
     }
@@ -22,7 +22,7 @@ class clienteController extends Controller {
             $dados['add_cliente'] = $usuario->temPermissao('alterar_clientes');
 
 
-            $this->carregarTemplate('painel-adm/cliente', $dados);
+            $this->carregarTemplate('cliente', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -40,12 +40,12 @@ class clienteController extends Controller {
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
                 $nome_permissao = addslashes($_POST['nome']);
                 $permissao->inserir($nome_permissao);
-                header("Location: ".BASE_URL."/painel-adm/cliente");
+                header("Location: ".BASE_URL."/cliente");
             }
             $dados['info_cliente'] = array(); //permite que a variável info_cliente exista na view, mas não carrega nenhuma informação 
-            $this->carregarTemplate('cadastrarCliente', $dados);
+            $this->carregarTemplate('forms/cadastrarCliente', $dados);
         } else {
-            header("Location: ".BASE_URL."painel-adm/cliente");
+            header("Location: ".BASE_URL."cliente");
         }
     }
 }

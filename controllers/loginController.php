@@ -10,20 +10,20 @@ class loginController extends Controller {
             $usuario = new Usuario();
 
             if($usuario->fazerLogin($login, $senha)) {
-                header("Location: ".BASE_URL)."/painel-adm/dashboard";
+                header("Location: ".BASE_URL)."/dashboard";
                 exit;
             } else {
                 $dados['error'] = 'Login e/ou senha inválida!';
             }
         }
 
-        $this->carregarView('painel-adm/login', $dados);
+        $this->carregarView('login', $dados);
     }
 
     public function logout() {
         $usuario = new Usuario();
         $usuario->logout();
 
-        header("Location: ".BASE_URL."/painel-adm/login");
+        header("Location: ".BASE_URL."/login");
     }
 }

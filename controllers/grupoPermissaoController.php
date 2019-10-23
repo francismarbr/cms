@@ -4,7 +4,7 @@ class grupoPermissaoController extends Controller {
         $usuario = new Usuario();
         //se o usuário não estiver logado, redireciona para login
         if($usuario->isLogado() == false) {
-            header("Location: ".BASE_URL."/painel-adm/login");
+            header("Location: ".BASE_URL."/login");
             exit;
         }
     }
@@ -19,7 +19,7 @@ class grupoPermissaoController extends Controller {
             $grupoPermissao = new GrupoPermissao();
             $dados['lista_grupos'] = $grupoPermissao->getListaGrupos(); 
 
-            $this->carregarTemplate('painel-adm/grupoPermissao', $dados);
+            $this->carregarTemplate('grupoPermissao', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -38,14 +38,14 @@ class grupoPermissaoController extends Controller {
                 $nome_permissao = addslashes($_POST['nome']);
                 $lista_permissoes = $_POST['permissoes'];
                 $grupoPermissao->inserir($nome_permissao, $lista_permissoes);
-                header("Location: ".BASE_URL."/painel-adm/grupoPermissao");
+                header("Location: ".BASE_URL."/grupoPermissao");
             }
             
             $permissao = new Permissao();
             //busca todas as permissões disponíveis para serem usadas na view cadastrar
             $dados['lista_permissoes'] = $permissao->getListaPermissoes();
             $dados['info_grupo'] = array(); //permite que a variável info_grupo exista na view, mas não carrega nenhuma informação 
-            $this->carregarTemplate('painel-adm/cadastrarGrupoPermissao', $dados);
+            $this->carregarTemplate('forms/cadastrarGrupoPermissao', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -64,14 +64,14 @@ class grupoPermissaoController extends Controller {
                 $nome_permissao = addslashes($_POST['nome']);
                 $lista_permissoes = $_POST['permissoes'];
                 $grupoPermissao->editar($id, $nome_permissao, $lista_permissoes);
-                header("Location: ".BASE_URL."/painel-adm/grupoPermissao");
+                header("Location: ".BASE_URL."/grupoPermissao");
             }
             
             $permissao = new Permissao();
             $dados['lista_permissoes'] = $permissao->getListaPermissoes();
             $dados['info_grupo'] = $grupoPermissao->getGrupo($id); //armazena informações do grupo a ser editado
 
-            $this->carregarTemplate('painel-adm/cadastrarGrupoPermissao', $dados);
+            $this->carregarTemplate('forms/cadastrarGrupoPermissao', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -88,7 +88,7 @@ class grupoPermissaoController extends Controller {
             
             $grupoPermissao->excluir($id_grupo);
             
-            header("Location: ".BASE_URL."/painel-adm/grupoPermissao");
+            header("Location: ".BASE_URL."/grupoPermissao");
         } else {
             header("Location: ".BASE_URL);
         }

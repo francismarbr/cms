@@ -2,10 +2,10 @@
 class Pagina extends Model {
 
    
-    public function inserir($titulo, $data, $imagem, $conteudo, $alt_imagem_capa, $descricao, $url, $views, $tipo, $id_categoria) {
+    public function inserir($titulo, $data, $imagem, $conteudo, $alt_imagem_capa, $descricao, $slug, $views, $tipo, $id_categoria) {
         try {
             $sql = "INSERT INTO pagina SET titulo = :titulo, data = :data, imagem = :imagem, conteudo = :conteudo, ";
-            $sql .= "alt_imagem_capa = :alt_imagem_capa, descricao = :descricao, url = :url, views = :views, tipo = :tipo, id_categoria = :id_categoria";
+            $sql .= "alt_imagem_capa = :alt_imagem_capa, descricao = :descricao, slug = :slug, views = :views, tipo = :tipo, id_categoria = :id_categoria";
             $sql = $this->conexaodb->prepare($sql);
             $sql->bindValue(":titulo", $titulo);
             $sql->bindValue(":data", $data);
@@ -13,7 +13,7 @@ class Pagina extends Model {
             $sql->bindValue(":conteudo", $conteudo);
             $sql->bindValue(":alt_imagem_capa", $alt_imagem_capa);
             $sql->bindValue(":descricao", $descricao);
-            $sql->bindValue(":url", $url);
+            $sql->bindValue(":slug", $slug);
             $sql->bindValue(":views", $views);
             $sql->bindValue(":tipo", $tipo);
             $sql->bindValue(":id_categoria", $id_categoria);
@@ -23,10 +23,10 @@ class Pagina extends Model {
         }
     }
             
-    public function editar($id, $titulo, $imagem, $conteudo, $alt_imagem_capa, $descricao, $url, $tipo, $id_categoria) {
+    public function editar($id, $titulo, $imagem, $conteudo, $alt_imagem_capa, $descricao, $slug, $tipo, $id_categoria) {
         try {
             $sql = "UPDATE pagina SET titulo = :titulo, conteudo = :conteudo, ";
-            $sql .= "alt_imagem_capa = :alt_imagem_capa, descricao = :descricao, url = :url, tipo = :tipo, id_categoria = :id_categoria";
+            $sql .= "alt_imagem_capa = :alt_imagem_capa, descricao = :descricao, slug = :slug, tipo = :tipo, id_categoria = :id_categoria";
             if(!empty($imagem)) {
                 $sql .= ", imagem = :imagem";
             }
@@ -40,7 +40,7 @@ class Pagina extends Model {
             $sql->bindValue(":conteudo", $conteudo);
             $sql->bindValue(":alt_imagem_capa", $alt_imagem_capa);
             $sql->bindValue(":descricao", $descricao);
-            $sql->bindValue(":url", $url);
+            $sql->bindValue(":slug", $slug);
             $sql->bindValue(":tipo", $tipo);
             $sql->bindValue(":id_categoria", $id_categoria);
             $sql->execute();

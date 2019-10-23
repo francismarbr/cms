@@ -6,7 +6,7 @@ class adminController extends Controller {
         $usuario = new Usuario();
         //se o usuário não estiver logado, redireciona para login
         if($usuario->isLogado() == false) {
-            header("Location: ".BASE_URL."/painel-adm/login");
+            header("Location: ".BASE_URL."/login");
             exit;
         }
     }
@@ -18,6 +18,6 @@ class adminController extends Controller {
         $usuario->setUsuarioLogado(); //busca o usuário logado para pegar suas informações
         $dados['nome_usuario'] = $usuario->getNome();
         
-        $this->carregarTemplateEmAdmin('painel-adm/dashboard', $dados);
+        $this->carregarTemplateEmAdmin('dashboard', $dados);
     }
 }

@@ -16,6 +16,7 @@ class Controller {
         require 'views/'.$nomeView.'.php';
     }
 
+    //template sistema administrativo
     public function carregarTemplateEmAdmin($nomeView, $dadosView = array()) {
         extract($dadosView);
         require 'views/admin.php';
