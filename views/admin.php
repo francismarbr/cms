@@ -184,15 +184,15 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">CONTEÚDO</li>
         <!-- Optionally, you can add icons to the links -->
-        <li><a href="<?php echo BASE_URL; ?>/painel-adm/pagina"><i class="fa fa-link"></i> <span>Páginas e Posts</span></a></li>
-        <li><a href="<?php echo BASE_URL; ?>/painel-adm/categoria"><i class="fa fa-link"></i> <span>Categorias</span></a></li>
+        <li><a href="<?php echo BASE_URL; ?>/pagina"><i class="fa fa-link"></i> <span>Páginas e Posts</span></a></li>
+        <li><a href="<?php echo BASE_URL; ?>/categoria"><i class="fa fa-link"></i> <span>Categorias</span></a></li>
         
-        <li><a href="<?php echo BASE_URL; ?>/painel-adm/cliente"><i class="fa fa-link"></i> <span>Clientes</span></a></li>
+        <li><a href="<?php echo BASE_URL; ?>/cliente"><i class="fa fa-link"></i> <span>Clientes</span></a></li>
         
         <li class="header">CONFIGURAÇÕES</li>
-        <li><a href="<?php echo BASE_URL; ?>/painel-adm/grupoPermissao"><i class="fa fa-link"></i> <span>Grupos de Permissões</span></a></li>
-        <li><a href="<?php echo BASE_URL; ?>/painel-adm/permissao"><i class="fa fa-link"></i> <span>Permissões</span></a></li>
-        <li><a href="<?php echo BASE_URL; ?>/painel-adm/usuario"><i class="fa fa-link"></i> <span>Usuários</span></a></li>
+        <li><a href="<?php echo BASE_URL; ?>/grupoPermissao"><i class="fa fa-link"></i> <span>Grupos de Permissões</span></a></li>
+        <li><a href="<?php echo BASE_URL; ?>/permissao"><i class="fa fa-link"></i> <span>Permissões</span></a></li>
+        <li><a href="<?php echo BASE_URL; ?>/usuario"><i class="fa fa-link"></i> <span>Usuários</span></a></li>
         
       </ul>
       <!-- /.sidebar-menu -->

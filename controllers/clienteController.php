@@ -22,7 +22,7 @@ class clienteController extends Controller {
             $dados['add_cliente'] = $usuario->temPermissao('alterar_clientes');
 
 
-            $this->carregarTemplate('cliente', $dados);
+            $this->carregarTemplateEmAdmin('cliente', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -43,7 +43,7 @@ class clienteController extends Controller {
                 header("Location: ".BASE_URL."/cliente");
             }
             $dados['info_cliente'] = array(); //permite que a variável info_cliente exista na view, mas não carrega nenhuma informação 
-            $this->carregarTemplate('forms/cadastrarCliente', $dados);
+            $this->carregarTemplateEmAdmin('forms/formCliente', $dados);
         } else {
             header("Location: ".BASE_URL."cliente");
         }

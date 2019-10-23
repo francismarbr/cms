@@ -39,7 +39,7 @@ class categoriaController extends Controller {
                 header("Location: ".BASE_URL."/categoria");
             }
             $dados['info_categoria'] = array(); //permite que a variável info_categoria exista na view, mas não carrega nenhuma informação 
-            $this->carregarTemplateEmAdmin('forms/cadastrarCategoria', $dados);
+            $this->carregarTemplateEmAdmin('forms/formCategoria', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -62,7 +62,7 @@ class categoriaController extends Controller {
 
             $dados['info_categoria'] = $categoria->getCategoria($id);
 
-            $this->carregarTemplateEmAdmin('forms/cadastrarCategoria', $dados);
+            $this->carregarTemplateEmAdmin('forms/formCategoria', $dados);
         } else {
             header("Location: ".BASE_URL);
         }

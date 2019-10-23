@@ -42,10 +42,10 @@ class grupoPermissaoController extends Controller {
             }
             
             $permissao = new Permissao();
-            //busca todas as permissões disponíveis para serem usadas na view cadastrar
+            //busca todas as permissões disponíveis para serem usadas na view form
             $dados['lista_permissoes'] = $permissao->getListaPermissoes();
             $dados['info_grupo'] = array(); //permite que a variável info_grupo exista na view, mas não carrega nenhuma informação 
-            $this->carregarTemplate('forms/cadastrarGrupoPermissao', $dados);
+            $this->carregarTemplate('forms/formGrupoPermissao', $dados);
         } else {
             header("Location: ".BASE_URL);
         }
@@ -71,7 +71,7 @@ class grupoPermissaoController extends Controller {
             $dados['lista_permissoes'] = $permissao->getListaPermissoes();
             $dados['info_grupo'] = $grupoPermissao->getGrupo($id); //armazena informações do grupo a ser editado
 
-            $this->carregarTemplate('forms/cadastrarGrupoPermissao', $dados);
+            $this->carregarTemplate('forms/formGrupoPermissao', $dados);
         } else {
             header("Location: ".BASE_URL);
         }

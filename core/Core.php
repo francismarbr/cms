@@ -15,10 +15,6 @@ class Core {
             $url = explode('/', $url);
             array_shift($url); //remove o primeiro registro do array, pois não adicona nada ao array
 
-            if(is_dir("views/".$url[0])) {
-                array_shift($url);
-            }
-
             $currentController = $url[0].'Controller';
             array_shift($url); // remove novamente a primeira opção do array, pois já foi usada acima.
 
