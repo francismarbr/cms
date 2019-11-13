@@ -17,7 +17,7 @@ class loginController extends Controller {
             }
         }
 
-        $this->carregarView('login', $dados);
+        $this->carregarView('sistema-adm/login', $dados);
     }
 
     public function logout() {

@@ -8,7 +8,10 @@ spl_autoload_register(function($class){
         require 'controllers/'.$class.'.php';
     } else if(file_exists('models/'.$class.'.php')) {
         require 'models/'.$class.'.php';
-    } else if(file_exists('core/'.$class.'.php')) {
+    } else if (file_exists('util/'.$class.'.php')) {
+        require 'util/'.$class.'.php';
+    } 
+    else if(file_exists('core/'.$class.'.php')) {
         require 'core/'.$class.'.php';
     }
 });

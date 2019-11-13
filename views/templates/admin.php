@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?php echo $dadosView['nome_empresa']; ?></title>
+  <title></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -206,10 +206,40 @@
           </li>
 
           <li>
-          <a href="<?php echo BASE_URL; ?>/dashboard">
-            <i class="fa fa-dashboard"></i> <span>Mídia</span>
-          </a>
-        </li>
+            <a href="<?php echo BASE_URL; ?>/midia">
+              <i class="fa fa-dashboard"></i> <span>Mídia</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="<?php echo BASE_URL; ?>/dashboard">
+              <i class="fa fa-dashboard"></i> <span>Produtos</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="<?php echo BASE_URL; ?>/dashboard">
+              <i class="fa fa-dashboard"></i> <span>Galeria de fotos</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="<?php echo BASE_URL; ?>/dashboard">
+              <i class="fa fa-dashboard"></i> <span>Portfólio</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="<?php echo BASE_URL; ?>/dashboard">
+              <i class="fa fa-dashboard"></i> <span>Clientes e Parceiros</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="<?php echo BASE_URL; ?>/dashboard">
+              <i class="fa fa-dashboard"></i> <span>Banners Slider</span>
+            </a>
+          </li>
 
           <li class="treeview">
             <a href="#">
@@ -225,6 +255,7 @@
               <li><a href="<?php echo BASE_URL; ?>/usuario"><i class="fa fa-link"></i> Usuários</a></li>
             </ul>
           </li>
+
       </ul>
 
       <!-- /.sidebar-menu -->
