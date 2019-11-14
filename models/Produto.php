@@ -3,11 +3,6 @@ class Produto extends model {
 
     public function inserir($nome, $imagem, $preco, $alt_imagem_capa, $descricao, $slug) {
         try {
-            if(!empty($imagem)){
-                $midia = new Midia();
-                $midia->inserir($imagem);
-            }
-
             $sql = "INSERT INTO produto SET nome = :nome, imagem = :imagem, descricao = :descricao, preco = :preco, alt_imagem_capa = :alt_imagem_capa, slug = :slug";
             $sql = $this->conexaodb->prepare($sql);
             $sql->bindValue(":nome", $nome);

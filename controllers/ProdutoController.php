@@ -45,7 +45,11 @@ class ProdutoController extends Controller {
                 if(empty($slug)) {
                     $slug = $formataNome->nome_amigavel($nome);
                 }
-                $produto->inserir($nome, $imagem_capa, $preco, $alt_imagem_capa, $descricao, $slug);
+                if(!empty($imagem_capa)){
+                    $midia = new Midia();
+                    $novo_nome_imagem = $midia->inserir_arquivo_unico($imagem_capa);
+                }
+                $produto->inserir($nome, $novo_nome_imagem, $preco, $alt_imagem_capa, $descricao, $slug);
 
                 header("Location: ".BASE_URL."/produto");
             }
@@ -78,7 +82,11 @@ class ProdutoController extends Controller {
                 if(empty($slug)) {
                     $slug = $formataNome->nome_amigavel($nome);
                 }
-                $produto->editar($id, $nome, $imagem_capa, $preco, $alt_imagem_capa, $descricao, $slug);
+                if(!empty($imagem_capa)){
+                    $midia = new Midia();
+                    $novo_nome_imagem = $midia->inserir_arquivo_unico($imagem_capa);
+                }
+                $produto->editar($id, $nome, $novo_nome_imagem, $preco, $alt_imagem_capa, $descricao, $slug);
                 
                 header("Location: ".BASE_URL."/produto");
             }
