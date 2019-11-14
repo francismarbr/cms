@@ -9,9 +9,11 @@ class Midia extends Model {
             'image/png'
         );
 
+        $quantidade_arquivos = count($arquivos['name']);
+
         $formataNome = new FormataNome();
 
-        for($qtd=0; $qtd < count($arquivos['name']); $qtd++) {
+        for($qtd=0; $qtd < $quantidade_arquivos; $qtd++) {
             
             $tipo = $arquivos['type'][$qtd];
 

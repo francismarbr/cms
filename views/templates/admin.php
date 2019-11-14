@@ -212,7 +212,7 @@
           </li>
 
           <li>
-            <a href="<?php echo BASE_URL; ?>/dashboard">
+            <a href="<?php echo BASE_URL; ?>/produto">
               <i class="fa fa-dashboard"></i> <span>Produtos</span>
             </a>
           </li>
