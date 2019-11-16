@@ -40,15 +40,6 @@
                   </div>
                 </div>
 
-                <div class="col-md-12">
-                  <div class="form-group">
-                      <label for="descricao">Descrição</label>
-                      <textarea name="descricao" class="form-control" id="descricao">
-                        <?php echo (!empty($info_produto['id'])) ? $info_produto['descricao'] : ''; ?>
-                      </textarea>
-                  </div>
-                </div>
-
                 <div class="col-md-5">
                   <div class="form-group">
                       <label for="alt_imagem_capa">Descrição Img Capa</label>
@@ -61,6 +52,22 @@
                   <div class="form-group">
                       <label for="slug">Url Amigável</label>
                       <input type="text" name="slug" id="slug" class="form-control" value="<?php echo (!empty($info_produto['id'])) ? $info_produto['slug'] : ''; ?>">
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                      <label for="descricao">Descrição</label>
+                      <textarea name="descricao" class="form-control" id="descricao">
+                        <?php echo (!empty($info_produto['id'])) ? $info_produto['descricao'] : ''; ?>
+                      </textarea>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="fotos">Fotos do produto</label>
+                      <input type="file" name="fotos[]" class="form-control" id="fotos" multiple />
                   </div>
                 </div>
 

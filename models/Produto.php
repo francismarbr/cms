@@ -1,16 +1,19 @@
 <?php
 class Produto extends model {
 
-    public function inserir($nome, $imagem, $preco, $alt_imagem_capa, $descricao, $slug) {
+    public function inserir($nome, $imagem_capa, $preco, $alt_imagem_capa, $descricao, $slug, $fotos) {
+        $fotos = implode(',', $fotos);
         try {
-            $sql = "INSERT INTO produto SET nome = :nome, imagem = :imagem, descricao = :descricao, preco = :preco, alt_imagem_capa = :alt_imagem_capa, slug = :slug";
+            $sql = "INSERT INTO produto SET nome = :nome, imagem_capa = :imagem_capa, descricao = :descricao, preco = :preco, ";
+            $sql .= "alt_imagem_capa = :alt_imagem_capa, slug = :slug, fotos = :fotos";
             $sql = $this->conexaodb->prepare($sql);
             $sql->bindValue(":nome", $nome);
-            $sql->bindValue(":imagem", $imagem);
+            $sql->bindValue(":imagem_capa", $imagem_capa);
             $sql->bindValue(":descricao", $descricao);
             $sql->bindValue(":preco", $preco);
             $sql->bindValue(":alt_imagem_capa", $alt_imagem_capa);
             $sql->bindValue(":slug", $slug);
+            $sql->bindValue(':fotos', $fotos);
             $sql->execute();
         } catch(PDOException $e) {
             echo "Não foi possível inserir página! ".$e->getMessage(); exit;
@@ -21,15 +24,15 @@ class Produto extends model {
         try {
             $sql = "UPDATE produto SET nome = :nome, descricao = :descricao, ";
             $sql .= "alt_imagem_capa = :alt_imagem_capa, preco = :preco, slug = :slug";
-            if(!empty($imagem)) {
-                $sql .= ", imagem = :imagem";
+            if(!empty($imagem_capa)) {
+                $sql .= ", imagem_capa = :imagem_capa";
             }
             $sql .= " WHERE id = :id";
             $sql = $this->conexaodb->prepare($sql);
             $sql->bindValue(":id", $id);
             $sql->bindValue(":nome", $nome);
-            if(!empty($imagem)) {
-                $sql->bindValue(":imagem", $imagem);
+            if(!empty($imagem_capa)) {
+                $sql->bindValue(":imagem_capa", $imagem_capa);
             }
             $sql->bindValue(":descricao", $descricao);
             $sql->bindValue(":preco", $preco);

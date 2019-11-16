@@ -39,7 +39,7 @@ class MidiaController extends Controller {
             
             if(!empty($_FILES['arquivo'])) {
                 $arquivos = $_FILES['arquivo'];
-                print_r($arquivos); exit;
+                
                 $midia->inserir_multiplos_arquivos($arquivos);
                 
                 header("Location: ".BASE_URL."/midia");

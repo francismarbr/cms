@@ -2,6 +2,7 @@
 class Midia extends Model {
 
     public function inserir_multiplos_arquivos($arquivos) {
+        $arquivos_salvos = array();
         $pasta_upload = "uploads";
         $arquivos_permitidos = array(
             'image/jpeg',
@@ -31,7 +32,10 @@ class Midia extends Model {
                     $sql->bindValue(":nome", $novo_nome);
                     $sql->bindValue(":slug", $slug);
     
-                    $sql->execute();              
+                   if($sql->execute()) {
+                       $arquivos_salvos[] = $this->conexaodb->lastInsertId();
+                   }              
+
                 } catch(PDOException $e) {
                     echo "Erro ao inserir arquivo de mídia! ".$e->getMessage(); exit;
                 }
@@ -39,10 +43,13 @@ class Midia extends Model {
             }
         }
 
+        return $arquivos_salvos;
+
     }
 
     public function inserir_arquivo_unico($arquivo) {
         $pasta_upload = "uploads";
+        $novo_nome = "";
         $arquivos_permitidos = array(
             'image/jpeg',
             'image/jpg',

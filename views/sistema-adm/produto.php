@@ -20,10 +20,12 @@
                             <td><?php echo $produto['id']; ?></td>
                             <td><?php echo $produto['nome']; ?></td>
                             <td>
-                              <a href="<?php echo BASE_URL; ?>/produto/editar/<?php echo $produto['id']; ?>" class="btn btn-info" 
+                                <a href="<?php echo BASE_URL; ?>/produto/editar/<?php echo $produto['id']; ?>" class="btn btn-info" 
                                     >Editar</a>
-                              <a href="<?php echo BASE_URL; ?>/produto/excluir/<?php echo $produto['id']; ?>" class="btn btn-danger" 
+                                <a href="<?php echo BASE_URL; ?>/produto/excluir/<?php echo $produto['id']; ?>" class="btn btn-danger" 
                                       onclick="return confirm('Deseja realmente excluir este registro?')">Excluir</a>
+                                <a href="<?php echo BASE_URL; ?>/produto/inserir_fotos/<?php echo $produto['id']; ?>" class="btn btn-info" 
+                                    >Adicionar Fotos</a>
                             </td>
                         </tr>
                         <?php endforeach; ?>

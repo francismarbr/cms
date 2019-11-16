@@ -36,20 +36,26 @@ class ProdutoController extends Controller {
             $formataNome = new FormataNome(); 
 
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
+                $midia = new Midia();
+
                 $nome = addslashes($_POST['nome']);
                 $imagem_capa = $_FILES['imagem_capa'];
                 $preco = addslashes($_POST['preco']);
                 $alt_imagem_capa = addslashes($_POST['alt_imagem_capa']);
                 $descricao = addslashes($_POST['descricao']);
                 $slug = addslashes($_POST['slug']);
+                $fotos = $_FILES['fotos'];
+                $id_fotos = array();
                 if(empty($slug)) {
                     $slug = $formataNome->nome_amigavel($nome);
                 }
                 if(!empty($imagem_capa)){
-                    $midia = new Midia();
                     $novo_nome_imagem = $midia->inserir_arquivo_unico($imagem_capa);
                 }
-                $produto->inserir($nome, $novo_nome_imagem, $preco, $alt_imagem_capa, $descricao, $slug);
+                if(!empty($_FILES['fotos'])){
+                    $id_fotos = $midia->inserir_multiplos_arquivos($fotos);
+                }
+                $produto->inserir($nome, $novo_nome_imagem, $preco, $alt_imagem_capa, $descricao, $slug, $id_fotos);
 
                 header("Location: ".BASE_URL."/produto");
             }
@@ -73,20 +79,26 @@ class ProdutoController extends Controller {
             $formataNome = new FormataNome(); 
 
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
+                $midia = new Midia();
+
                 $nome = addslashes($_POST['nome']);
                 $imagem_capa = $_FILES['imagem_capa'];
                 $preco = addslashes($_POST['preco']);
                 $alt_imagem_capa = addslashes($_POST['alt_imagem_capa']);
                 $descricao = addslashes($_POST['descricao']);
                 $slug = addslashes($_POST['slug']);
+                $fotos = $_FILES['fotos'];
+                $id_fotos = array();
                 if(empty($slug)) {
                     $slug = $formataNome->nome_amigavel($nome);
                 }
                 if(!empty($imagem_capa)){
-                    $midia = new Midia();
                     $novo_nome_imagem = $midia->inserir_arquivo_unico($imagem_capa);
                 }
-                $produto->editar($id, $nome, $novo_nome_imagem, $preco, $alt_imagem_capa, $descricao, $slug);
+                if(!empty($_POST['fotos'])){
+                    $id_fotos = $midia->inserir_multiplos_arquivos($fotos);
+                }
+                $produto->editar($id, $nome, $novo_nome_imagem, $preco, $alt_imagem_capa, $descricao, $slug, $id_fotos);
                 
                 header("Location: ".BASE_URL."/produto");
             }
