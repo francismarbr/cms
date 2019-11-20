@@ -19,6 +19,8 @@
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/adminlte/dist/css/skins/skin-blue-light.min.css">
 
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/css/estilos.css">
+
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -298,6 +300,7 @@
 
 <!-- jQuery 3 -->
 <script src="<?php echo BASE_URL; ?>/assets/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo BASE_URL; ?>/assets/js/script.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo BASE_URL; ?>/assets/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->

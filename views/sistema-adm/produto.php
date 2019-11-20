@@ -12,7 +12,7 @@
                     <table class="table table-hover">
                         <tr>
                             <th>ID</th>
-                            <th>Permissão</th>
+                            <th>Nome do Produto</th>
                             <th>Ação</th>
                         </tr>
                         <?php foreach($lista_produtos as $produto): ?>
@@ -24,8 +24,6 @@
                                     >Editar</a>
                                 <a href="<?php echo BASE_URL; ?>/produto/excluir/<?php echo $produto['id']; ?>" class="btn btn-danger" 
                                       onclick="return confirm('Deseja realmente excluir este registro?')">Excluir</a>
-                                <a href="<?php echo BASE_URL; ?>/produto/inserir_fotos/<?php echo $produto['id']; ?>" class="btn btn-info" 
-                                    >Adicionar Fotos</a>
                             </td>
                         </tr>
                         <?php endforeach; ?>

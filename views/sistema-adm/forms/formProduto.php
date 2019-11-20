@@ -64,18 +64,28 @@
                   </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-12">
                   <div class="form-group">
                       <label for="fotos">Fotos do produto</label>
                       <input type="file" name="fotos[]" class="form-control" id="fotos" multiple />
                   </div>
                 </div>
+                
+                <?php foreach($imagens_produto as $item): ?>
+                  <div class="col-md-3 imagem_produto">
+                    
+                      <img src="<?php echo BASE_URL.'/uploads/'.$item['nome_imagem']; ?>">
+                      <input type="hidden" name="imagens_vinculadas[]" value="<?php echo $item['id'];?>" />
+                      <br ><a href="javascript:;">[Remover]</a>
+                    
+                  </div>
+                <?php endforeach; ?>
 
               </div>
               <!-- /.box-body -->
 
             </form>
-
+            
             <script type="text/javascript" src="<?php echo BASE_URL; ?>/plugins/ckeditor/ckeditor.js"></script>
             <script type="text/javascript">
               window.onload = function() {

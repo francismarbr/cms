@@ -1,0 +1,8 @@
+.imagem_produto {
+    margin-bottom: 20px;
+    text-align:center;
+}
+
+.imagem_produto img {
+    width: 100%;
+}

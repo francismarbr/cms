@@ -60,6 +60,7 @@ class ProdutoController extends Controller {
                 header("Location: ".BASE_URL."/produto");
             }
             $dados['info_produto'] = array();
+            $dados['imagens_produto'] = array();
  
             $this->carregarTemplateEmAdmin('sistema-adm/forms/formProduto', $dados);
         } else {
@@ -89,21 +90,23 @@ class ProdutoController extends Controller {
                 $slug = addslashes($_POST['slug']);
                 $fotos = $_FILES['fotos'];
                 $id_fotos = array();
+                $imagens_vinculadas = $_POST['imagens_vinculadas'];
                 if(empty($slug)) {
                     $slug = $formataNome->nome_amigavel($nome);
                 }
                 if(!empty($imagem_capa)){
                     $novo_nome_imagem = $midia->inserir_arquivo_unico($imagem_capa);
                 }
-                if(!empty($_POST['fotos'])){
+                if(!empty($fotos)){
                     $id_fotos = $midia->inserir_multiplos_arquivos($fotos);
                 }
-                $produto->editar($id, $nome, $novo_nome_imagem, $preco, $alt_imagem_capa, $descricao, $slug, $id_fotos);
+                $produto->editar($id, $nome, $novo_nome_imagem, $preco, $alt_imagem_capa, $descricao, $slug, $id_fotos, $imagens_vinculadas);
                 
                 header("Location: ".BASE_URL."/produto");
             }
 
             $dados['info_produto'] = $produto->getProduto($id);
+            $dados['imagens_produto'] = $produto->getImagensPorProduto($id);
         
             $this->carregarTemplateEmAdmin('/sistema-adm/forms/formProduto', $dados);
         } else {
