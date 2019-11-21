@@ -220,7 +220,7 @@
           </li>
 
           <li>
-            <a href="<?php echo BASE_URL; ?>/dashboard">
+            <a href="<?php echo BASE_URL; ?>/galeria">
               <i class="fa fa-dashboard"></i> <span>Galeria de fotos</span>
             </a>
           </li>

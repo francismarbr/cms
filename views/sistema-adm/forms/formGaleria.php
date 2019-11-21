@@ -6,7 +6,7 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Cadastrar Produto</h3>
+              <h3 class="box-title">Cadastrar Galeria</h3>
             </div>
 
             <!-- /.box-header -->
@@ -22,7 +22,7 @@
                   <div class="form-group">
                     <label for="txtTitulo">Nome</label>
                     <input type="text" name="nome" class="form-control" id="txtTitulo" placeholder="Digite o título" 
-                      value="<?php echo (!empty($info_produto['id'])) ? $info_produto['nome'] : ''; ?>" required>
+                      value="<?php echo (!empty($info_galeria['id'])) ? $info_galeria['nome'] : ''; ?>" required>
                   </div>
                 </div>
 
@@ -33,25 +33,18 @@
                   </div>
                 </div>
 
-                <div class="col-md-3">
-                  <div class="form-group">
-                      <label for="tipo">Preço</label>
-                      <input type="text" id="preco" name="preco" class="form-control" value="<?php echo (!empty($info_produto['preco'])) ? $info_produto['preco'] : ''; ?>" />
-                  </div>
-                </div>
-
                 <div class="col-md-5">
                   <div class="form-group">
                       <label for="alt_imagem_capa">Descrição Img Capa</label>
                       <input type ="text" name="alt_imagem_capa" class="form-control" id="alt_imagem_capa" 
-                        value="<?php echo (!empty($info_produto['id'])) ? $info_produto['alt_imagem_capa'] : ''; ?>">
+                        value="<?php echo (!empty($info_galeria['id'])) ? $info_galeria['alt_imagem_capa'] : ''; ?>">
                   </div>
                 </div>
 
                 <div class="col-md-7">
                   <div class="form-group">
                       <label for="slug">Url Amigável</label>
-                      <input type="text" name="slug" id="slug" class="form-control" value="<?php echo (!empty($info_produto['id'])) ? $info_produto['slug'] : ''; ?>">
+                      <input type="text" name="slug" id="slug" class="form-control" value="<?php echo (!empty($info_galeria['id'])) ? $info_galeria['slug'] : ''; ?>">
                   </div>
                 </div>
 
@@ -59,19 +52,19 @@
                   <div class="form-group">
                       <label for="descricao">Descrição</label>
                       <textarea name="descricao" class="form-control" id="descricao">
-                        <?php echo (!empty($info_produto['id'])) ? $info_produto['descricao'] : ''; ?>
+                        <?php echo (!empty($info_galeria['id'])) ? $info_galeria['descricao'] : ''; ?>
                       </textarea>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                      <label for="fotos">Fotos do produto</label>
+                      <label for="fotos">Fotos da galeria</label>
                       <input type="file" name="fotos[]" class="form-control" id="fotos" multiple />
                   </div>
                 </div>
                 
-                <?php foreach($imagens_produto as $item): ?>
+                <?php foreach($imagens_galeria as $item): ?>
                   <div class="col-md-3 imagem_item">
                     
                       <img src="<?php echo BASE_URL.'/uploads/'.$item['nome_imagem']; ?>">

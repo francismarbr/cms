@@ -1,8 +1,8 @@
-.imagem_produto {
+.imagem_item {
     margin-bottom: 20px;
     text-align:center;
 }
 
-.imagem_produto img {
+.imagem_item img {
     width: 100%;
 }
