@@ -1,5 +1,5 @@
 $(function(){
-    $('.imagem_produto a').on('click', function() {
+    $('.imagem_item a').on('click', function() {
         $(this).parent().remove();
     });
 });
