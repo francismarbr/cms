@@ -11,7 +11,7 @@
 
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" method="post" encytpe="multipart/form-data">
+            <form role="form" method="post" enctype="multipart/form-data">
               <div class="box-body">
 
                 <div class="box-footer">

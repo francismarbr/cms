@@ -209,36 +209,30 @@
 
           <li>
             <a href="<?php echo BASE_URL; ?>/midia">
-              <i class="fa fa-dashboard"></i> <span>Mídia</span>
+              <i class="fa fa-image"></i> <span>Mídia</span>
             </a>
           </li>
 
           <li>
             <a href="<?php echo BASE_URL; ?>/produto">
-              <i class="fa fa-dashboard"></i> <span>Produtos</span>
+              <i class="fa fa-cube"></i> <span>Produtos</span>
             </a>
           </li>
 
           <li>
             <a href="<?php echo BASE_URL; ?>/galeria">
-              <i class="fa fa-dashboard"></i> <span>Galeria de fotos</span>
+            <i class="fa fa-camera-retro"></i> <span>Galeria de fotos</span>
             </a>
           </li>
 
           <li>
             <a href="<?php echo BASE_URL; ?>/portfolio">
-              <i class="fa fa-dashboard"></i> <span>Portfólio</span>
+              <i class="fa fa-cubes"></i> <span>Portfólio</span>
             </a>
           </li>
 
           <li>
-            <a href="<?php echo BASE_URL; ?>/dashboard">
-              <i class="fa fa-dashboard"></i> <span>Clientes e Parceiros</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="<?php echo BASE_URL; ?>/dashboard">
+            <a href="<?php echo BASE_URL; ?>/banner">
               <i class="fa fa-dashboard"></i> <span>Banners Slider</span>
             </a>
           </li>
