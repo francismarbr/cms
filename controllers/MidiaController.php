@@ -102,4 +102,20 @@ class MidiaController extends Controller {
         }
     }
 
+    public function upload_tinymce() {
+        
+        if(!empty($_FILES['file']['tmp_name'])) {
+            $midia = new Midia();
+            $nome_imagem = $midia->inserir_arquivo_unico($_FILES['file']);
+
+            $local_arquivo = BASE_URL.'/uploads';
+            $array = array(
+                'location' => $local_arquivo.'/'.$nome_imagem
+            );
+
+            echo json_encode($array);
+            exit;
+        }
+    }
+
 }

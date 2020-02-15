@@ -42,7 +42,7 @@ class ProdutoController extends Controller {
                 $imagem_capa = $_FILES['imagem_capa'];
                 $preco = addslashes($_POST['preco']);
                 $alt_imagem_capa = addslashes($_POST['alt_imagem_capa']);
-                $descricao = addslashes($_POST['descricao']);
+                $descricao = $_POST['descricao'];
                 $slug = addslashes($_POST['slug']);
                 $fotos = $_FILES['fotos'];
                 $id_fotos = array();
@@ -86,7 +86,7 @@ class ProdutoController extends Controller {
                 $imagem_capa = $_FILES['imagem_capa'];
                 $preco = addslashes($_POST['preco']);
                 $alt_imagem_capa = addslashes($_POST['alt_imagem_capa']);
-                $descricao = addslashes($_POST['descricao']);
+                $descricao = $_POST['descricao'];
                 $slug = addslashes($_POST['slug']);
                 $fotos = $_FILES['fotos'];
                 $id_fotos = array();

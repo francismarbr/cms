@@ -40,7 +40,7 @@ class PaginaController extends Controller {
                 $titulo = addslashes($_POST['titulo']);
                 $data = date('d/m/y');
                 $imagem_capa = addslashes($_POST['imagem_capa']);
-                $conteudo = addslashes($_POST['conteudo']);
+                $conteudo = $_POST['conteudo'];
                 $alt_imagem_capa = addslashes($_POST['alt_imagem_capa']);
                 $descricao = addslashes($_POST['descricao']);
                 $slug = addslashes($_POST['slug']);
@@ -73,7 +73,7 @@ class PaginaController extends Controller {
             if(isset($_POST['titulo']) && !empty($_POST['titulo'])){
                 $titulo = addslashes($_POST['titulo']);
                 $imagem_capa = addslashes($_POST['imagem_capa']);
-                $conteudo = addslashes($_POST['conteudo']);
+                $conteudo = $_POST['conteudo'];
                 $alt_imagem_capa = addslashes($_POST['alt_imagem_capa']);
                 $descricao = addslashes($_POST['descricao']);
                 $slug = addslashes($_POST['slug']);

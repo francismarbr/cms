@@ -8,13 +8,13 @@
         $config['dbname'] = 'sistemag';
         $config['host'] = "localhost";
         $config['dbusuario'] = 'root';
-        $config['dbsenha'] = "";
+        $config['dbsenha'] = "1405";
     } else {
         define("BASE_URL", "http://localhost/sistemagestao");
         $config['dbname'] = 'sistemag';
         $config['host'] = "localhost";
         $config['dbusuario'] = 'root';
-        $config['dbsenha'] = "";
+        $config['dbsenha'] = "1405";
     }
 
     global $conexaoBaseDados;

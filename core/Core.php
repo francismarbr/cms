@@ -31,7 +31,7 @@ class Core {
             }
 
         } else {
-            $currentController = 'homeController';
+            $currentController = 'DashboardController';
             $currentAction = 'index';
         }
 

@@ -41,7 +41,7 @@ class GaleriaController extends Controller {
                 $nome = addslashes($_POST['nome']);
                 $imagem_capa = $_FILES['imagem_capa'];
                 $alt_imagem_capa = addslashes($_POST['alt_imagem_capa']);
-                $descricao = addslashes($_POST['descricao']);
+                $descricao = $_POST['descricao'];
                 $slug = addslashes($_POST['slug']);
                 $fotos = $_FILES['fotos'];
                 $id_fotos = array();
@@ -85,7 +85,7 @@ class GaleriaController extends Controller {
                 $nome = addslashes($_POST['nome']);
                 $imagem_capa = $_FILES['imagem_capa'];
                 $alt_imagem_capa = addslashes($_POST['alt_imagem_capa']);
-                $descricao = addslashes($_POST['descricao']);
+                $descricao = $_POST['descricao'];
                 $slug = addslashes($_POST['slug']);
                 $fotos = $_FILES['fotos'];
                 $id_fotos = array();

@@ -20,9 +20,9 @@
                             <td><?php echo $categoria['id']; ?></td>
                             <td><?php echo $categoria['nome']; ?></td>
                             <td>
-                              <a href="<?php echo BASE_URL; ?>/painel-adm/categoria/editar/<?php echo $categoria['id']; ?>" class="btn btn-info" 
+                              <a href="<?php echo BASE_URL; ?>/categoria/editar/<?php echo $categoria['id']; ?>" class="btn btn-info" 
                                     >Editar</a>
-                              <a href="<?php echo BASE_URL; ?>/painel-adm/categoria/excluir/<?php echo $categoria['id']; ?>" class="btn btn-danger" 
+                              <a href="<?php echo BASE_URL; ?>/categoria/excluir/<?php echo $categoria['id']; ?>" class="btn btn-danger" 
                                       onclick="return confirm('Deseja realmente excluir este registro?')">Excluir</a>
                             </td>
                         </tr>

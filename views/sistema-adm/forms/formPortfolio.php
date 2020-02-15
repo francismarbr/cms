@@ -78,16 +78,25 @@
               <!-- /.box-body -->
 
             </form>
-            
-            <script type="text/javascript" src="<?php echo BASE_URL; ?>/plugins/ckeditor/ckeditor.js"></script>
-            <script type="text/javascript">
-              window.onload = function() {
-                CKEDITOR.replace("descricao");
-              }
-            </script>
 
           </div>
           <!-- /.box -->
         </div>
     </div>
 </section>
+
+<script src="https://cdn.tiny.cloud/1/gy6w5juwxko56hp34fy5c9owjed61utwmt00nsqxwrc0kbdp/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript">
+tinymce.init({
+  selector: '#descricao',
+  height: 300,
+  menubar:false,
+  plugins:[
+    'texcolor image media lists code'
+  ],
+  toolbar:'undo redo | formatselect | bold italic backcolor | media image | alignleft aligncenter alignright alignjustify | bullist numlist | removeformat | code',
+  automatic_uploads:true,
+  file_picker_types:'image',
+  images_upload_url:'<?php echo BASE_URL; ?>/midia/upload_tinymce'
+});
+</script>
