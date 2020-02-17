@@ -92,9 +92,9 @@ tinymce.init({
   height: 300,
   menubar:false,
   plugins:[
-    'texcolor image media lists code'
+    'texcolor image media lists link code'
   ],
-  toolbar:'undo redo | formatselect | bold italic backcolor | media image | alignleft aligncenter alignright alignjustify | bullist numlist | removeformat | code',
+  toolbar:'undo redo | formatselect | bold italic backcolor | media image | alignleft aligncenter alignright alignjustify | bullist numlist | removeformat | link | code',
   automatic_uploads:true,
   file_picker_types:'image',
   images_upload_url:'<?php echo BASE_URL; ?>/midia/upload_tinymce'

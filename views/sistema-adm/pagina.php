@@ -12,7 +12,7 @@
                     <table class="table table-hover">
                         <tr>
                             <th>ID</th>
-                            <th>Permissão</th>
+                            <th>Nome</th>
                             <th>Ação</th>
                         </tr>
                         <?php foreach($lista_paginas as $pagina): ?>

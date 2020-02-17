@@ -88,13 +88,13 @@
 <script src="https://cdn.tiny.cloud/1/gy6w5juwxko56hp34fy5c9owjed61utwmt00nsqxwrc0kbdp/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script type="text/javascript">
 tinymce.init({
-  selector: '#descricao',
+  selector: '#conteudo',
   height: 300,
   menubar:false,
   plugins:[
-    'texcolor image media lists code'
+    'texcolor image media lists link code'
   ],
-  toolbar:'undo redo | formatselect | bold italic backcolor | media image | alignleft aligncenter alignright alignjustify | bullist numlist | removeformat | code',
+  toolbar:'undo redo | formatselect | bold italic backcolor | media image | alignleft aligncenter alignright alignjustify | bullist numlist | removeformat | link | code',
   automatic_uploads:true,
   file_picker_types:'image',
   images_upload_url:'<?php echo BASE_URL; ?>/midia/upload_tinymce'
