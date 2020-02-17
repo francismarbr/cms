@@ -1,38 +1,38 @@
 <?php
 class PaginaController extends Controller {
+    
+    private $dados;
+    private $usuario;
+    
     public function __construct() {
-        $usuario = new Usuario();
+        $this->usuario = new Usuario();
+        
         //se o usuário não estiver logado, redireciona para login
-        if($usuario->isLogado() == false) {
+        if($this->usuario->setUsuarioLogado() == false) {
             header("Location: ".BASE_URL."/login");
             exit;
         }
+
+        $this->dados = array(
+            'nome_usuario' => $this->usuario->getNome(),
+            'menu_ativo' => 'conteudo',
+            'submenu_ativo' => 'post'
+        );
     }
 
     public function index() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('consultar_pagina')) {
+        if($this->usuario->temPermissao('consultar_pagina')) {
             $pagina = new Pagina();
-            $dados['lista_paginas'] = $pagina->getListaPaginas($tipo = "");
+            $this->dados['lista_paginas'] = $pagina->getListaPaginas($tipo = "");
             
-            $this->carregarTemplateEmAdmin('sistema-adm/pagina', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/pagina', $this->dados);
         } else {
             header("Location: ".BASE_URL."/dashboard");
         }
     }
 
     public function inserir() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-        
-
-        if($usuario->temPermissao('gerenciar_pagina')) {
+        if($this->usuario->temPermissao('gerenciar_pagina')) {
             $pagina = new Pagina();
             $categoria = new Categoria(); 
 
@@ -51,22 +51,16 @@ class PaginaController extends Controller {
 
                 header("Location: ".BASE_URL."/pagina");
             }
-            $dados['info_pagina'] = array(); //permite que a variável info_permissao exista na view, mas não carrega nenhuma informação 
-            $dados['lista_categorias'] = $categoria->getListaCategorias(); 
-            $this->carregarTemplateEmAdmin('sistema-adm/forms/formPagina', $dados);
+            $this->dados['info_pagina'] = array(); //permite que a variável info_permissao exista na view, mas não carrega nenhuma informação 
+            $this->dados['lista_categorias'] = $categoria->getListaCategorias(); 
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formPagina', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function editar($id) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-        
-
-        if($usuario->temPermissao('gerenciar_pagina')) {
+        if($this->usuario->temPermissao('gerenciar_pagina')) {
             $pagina = new Pagina();
             $categoria = new Categoria(); 
 
@@ -84,21 +78,16 @@ class PaginaController extends Controller {
                 header("Location: ".BASE_URL."/pagina");
             }
 
-            $dados['info_pagina'] = $pagina->getPagina($id);
-            $dados['lista_categorias'] = $categoria->getListaCategorias(); 
-            $this->carregarTemplateEmAdmin('/sistema-adm/forms/formPagina', $dados);
+            $this->dados['info_pagina'] = $pagina->getPagina($id);
+            $this->dados['lista_categorias'] = $categoria->getListaCategorias(); 
+            $this->carregarTemplateEmAdmin('/sistema-adm/forms/formPagina', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function excluir($id_pagina) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_pagina')) {
+        if($this->usuario->temPermissao('gerenciar_pagina')) {
             $pagina = new Pagina();
 
             $pagina->excluir($id_pagina);

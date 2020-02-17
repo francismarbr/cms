@@ -12,10 +12,11 @@
                     <table class="table table-hover">
                         <tr>
                             <th>ID</th>
-                            <th>Permissão</th>
+                            <th>Nome</th>
                             <th>Mostrar no site?</th>
                             <th>Ordem</th>
-                            <th>Ação</th>
+                            <th>Nome do Arquivo</th>
+                            <th width="150">Ação</th>
                         </tr>
                         <?php foreach($lista_banners as $banner): ?>
                         <tr>
@@ -23,6 +24,7 @@
                             <td><?php echo $banner['nome']; ?></td>
                             <td><?php echo ($banner['mostrar'] == 1) ? "SIM" : "NÃO"; ?></td>
                             <td><?php echo $banner['ordem']; ?></td>
+                            <td><?php echo $banner['imagem']; ?></td>
                             <td>
                             <a href="<?php echo BASE_URL; ?>/banner/editar/<?php echo $banner['id']; ?>" class="btn btn-info" >Editar</a>
                               <a href="<?php echo BASE_URL; ?>/banner/excluir/<?php echo $banner['id']; ?>" class="btn btn-danger" 

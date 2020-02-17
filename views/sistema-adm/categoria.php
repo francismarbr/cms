@@ -12,8 +12,8 @@
                     <table class="table table-hover">
                         <tr>
                             <th>ID</th>
-                            <th>Permissão</th>
-                            <th>Ação</th>
+                            <th>Nome</th>
+                            <th width="150">Ação</th>
                         </tr>
                         <?php foreach($lista_categorias as $categoria): ?>
                         <tr>

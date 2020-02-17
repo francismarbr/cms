@@ -130,6 +130,10 @@ class Usuario extends Model {
                 $this->permissoes = new Permissao();
                 $this->permissoes->setPerfilAcesso($this->infoUsuario['perfil_acesso_id']);
             }
+
+            return true;
+        } else {
+            return false;
         }
     }
 

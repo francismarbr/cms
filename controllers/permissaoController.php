@@ -1,36 +1,37 @@
 <?php
 class permissaoController extends Controller {
+    
+    private $dados;
+    private $usuario;
+    
     public function __construct() {
-        $usuario = new Usuario();
+        $this->usuario = new Usuario();
+        
         //se o usuário não estiver logado, redireciona para login
-        if($usuario->isLogado() == false) {
+        if($this->usuario->setUsuarioLogado() == false) {
             header("Location: ".BASE_URL."/login");
             exit;
         }
+
+        $this->dados = array(
+            'nome_usuario' => $this->usuario->getNome(),
+            'menu_ativo' => 'configuracoes',
+            'submenu_ativo' => 'permissao'
+        );
     }
 
     public function index() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_permissoes')) {
+        if($this->usuario->temPermissao('gerenciar_permissoes')) {
             $permissao = new Permissao();
-            $dados['lista_permissoes'] = $permissao->getListaPermissoes(); 
-            $this->carregarTemplateEmAdmin('sistema-adm/permissao', $dados);
+            $this->dados['lista_permissoes'] = $permissao->getListaPermissoes(); 
+            $this->carregarTemplateEmAdmin('sistema-adm/permissao', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
-    public function inserir() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_permissoes')) {
+    public function inserir() {        
+        if($this->usuario->temPermissao('gerenciar_permissoes')) {
             $permissao = new Permissao(); 
 
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
@@ -38,20 +39,15 @@ class permissaoController extends Controller {
                 $permissao->inserir($nome_permissao);
                 header("Location: ".BASE_URL."/permissao");
             }
-            $dados['info_permissao'] = array(); //permite que a variável info_permissao exista na view, mas não carrega nenhuma informação 
-            $this->carregarTemplateEmAdmin('sistema-adm/forms/formPermissao', $dados);
+            $this->dados['info_permissao'] = array(); //permite que a variável info_permissao exista na view, mas não carrega nenhuma informação 
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formPermissao', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function editar($id) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_permissoes')) {
+        if($this->usuario->temPermissao('gerenciar_permissoes')) {
             $permissao = new Permissao(); 
 
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
@@ -60,21 +56,16 @@ class permissaoController extends Controller {
                 header("Location: ".BASE_URL."/permissao");
             }
 
-            $dados['info_permissao'] = $permissao->getPermissao($id);
+            $this->dados['info_permissao'] = $permissao->getPermissao($id);
 
-            $this->carregarTemplateEmAdmin('sistema-adm/forms/formPermissao', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formPermissao', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function excluir($id_permissao) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_permissoes')) {
+        if($this->usuario->temPermissao('gerenciar_permissoes')) {
             $permissao = new Permissao();
 
             $permissao->excluir($id_permissao);

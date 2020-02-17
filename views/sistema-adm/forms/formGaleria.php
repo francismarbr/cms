@@ -88,7 +88,7 @@
 <script src="https://cdn.tiny.cloud/1/gy6w5juwxko56hp34fy5c9owjed61utwmt00nsqxwrc0kbdp/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script type="text/javascript">
 tinymce.init({
-  selector: '#conteudo',
+  selector: '#descricao',
   height: 300,
   menubar:false,
   plugins:[

@@ -13,7 +13,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Permissão</th>
-                            <th>Ação</th>
+                            <th width="150">Ação</th>
                         </tr>
                         <?php foreach($lista_permissoes as $permissao): ?>
                         <tr>

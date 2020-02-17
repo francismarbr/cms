@@ -1,37 +1,38 @@
 <?php
 class BannerController extends Controller {
+    
+    private $dados;
+    private $usuario;
+    
     public function __construct() {
-        $usuario = new Usuario();
+        $this->usuario = new Usuario();
+        
         //se o usuário não estiver logado, redireciona para login
-        if($usuario->isLogado() == false) {
+        if($this->usuario->setUsuarioLogado() == false) {
             header("Location: ".BASE_URL."/login");
             exit;
         }
+
+        $this->dados = array(
+            'nome_usuario' => $this->usuario->getNome(),
+            'menu_ativo' => 'banner',
+            'submenu_ativo' => ''
+        );
     }
 
     public function index() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_banner')) {
+        if($this->usuario->temPermissao('gerenciar_banner')) {
             $banner = new Banner();
-            $dados['lista_banners'] = $banner->getListaBanners($tipo = "");
+            $this->dados['lista_banners'] = $banner->getListaBanners($tipo = "");
             
-            $this->carregarTemplateEmAdmin('sistema-adm/banner', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/banner', $this->dados);
         } else {
             header("Location: ".BASE_URL."/dashboard");
         }
     }
 
     public function inserir() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-        
-        if($usuario->temPermissao('gerenciar_banner')) {
+        if($this->usuario->temPermissao('gerenciar_banner')) {
             $banner = new Banner();
             $midia = new Midia();
 
@@ -48,20 +49,15 @@ class BannerController extends Controller {
 
                 header("Location: ".BASE_URL."/banner");
             }
-            $dados['info_banner'] = array(); //permite que a variável info_permissao exista na view, mas não carrega nenhuma informação 
-            $this->carregarTemplateEmAdmin('sistema-adm/forms/formBanner', $dados);
+            $this->dados['info_banner'] = array(); //permite que a variável info_permissao exista na view, mas não carrega nenhuma informação 
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formBanner', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function editar($id) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-        
-        if($usuario->temPermissao('gerenciar_banner')) {
+        if($this->usuario->temPermissao('gerenciar_banner')) {
             $banner = new Banner();
             $midia = new Midia();
 
@@ -77,20 +73,15 @@ class BannerController extends Controller {
 
                 header("Location: ".BASE_URL."/banner");
             }
-            $dados['info_banner'] = $banner->getBanner($id);
-            $this->carregarTemplateEmAdmin('sistema-adm/forms/formBanner', $dados);
+            $this->dados['info_banner'] = $banner->getBanner($id);
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formBanner', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function excluir($id_banner) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_banner')) {
+        if($this->usuario->temPermissao('gerenciar_banner')) {
             $banner = new Banner();
 
             $banner->excluir($id_banner);

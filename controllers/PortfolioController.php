@@ -1,37 +1,37 @@
 <?php
 class PortfolioController extends Controller {
+    
+    private $dados;
+    private $usuario;
+    
     public function __construct() {
-        $usuario = new Usuario();
+        $this->usuario = new Usuario();
+        
         //se o usuário não estiver logado, redireciona para login
-        if($usuario->isLogado() == false) {
+        if($this->usuario->setUsuarioLogado() == false) {
             header("Location: ".BASE_URL."/login");
             exit;
         }
+
+        $this->dados = array(
+            'nome_usuario' => $this->usuario->getNome(),
+            'menu_ativo' => 'portfolio',
+            'submenu_ativo' => ''
+        );
     }
 
     public function index() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_portfolio')) {
+        if($this->usuario->temPermissao('gerenciar_portfolio')) {
             $portfolio = new Portfolio();
-            $dados['lista_portfolios'] = $portfolio->getListaPortfolios($tipo = "");
-            $this->carregarTemplateEmAdmin('sistema-adm/portfolio', $dados);
+            $this->dados['lista_portfolios'] = $portfolio->getListaPortfolios($tipo = "");
+            $this->carregarTemplateEmAdmin('sistema-adm/portfolio', $this->dados);
         } else {
             header("Location: ".BASE_URL."/dashboard");
         }
     }
 
     public function inserir() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-        
-
-        if($usuario->temPermissao('gerenciar_portfolio')) {
+         if($this->usuario->temPermissao('gerenciar_portfolio')) {
             $portfolio = new Portfolio();
             $formataNome = new FormataNome(); 
 
@@ -59,23 +59,17 @@ class PortfolioController extends Controller {
                
               header("Location: ".BASE_URL."/portfolio");
             }
-            $dados['info_portfolio'] = array();
-            $dados['imagens_portfolio'] = array();
+            $this->dados['info_portfolio'] = array();
+            $this->dados['imagens_portfolio'] = array();
  
-            $this->carregarTemplateEmAdmin('sistema-adm/forms/formPortfolio', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formPortfolio', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function editar($id) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-        
-
-        if($usuario->temPermissao('gerenciar_portfolio')) {
+        if($this->usuario->temPermissao('gerenciar_portfolio')) {
             $portfolio = new Portfolio();
             $formataNome = new FormataNome(); 
 
@@ -104,22 +98,17 @@ class PortfolioController extends Controller {
                 header("Location: ".BASE_URL."/portfolio");
             }
 
-            $dados['info_portfolio'] = $portfolio->getPortfolio($id);
-            $dados['imagens_portfolio'] = $portfolio->getImagensPorPortfolio($id);
+            $this->dados['info_portfolio'] = $portfolio->getPortfolio($id);
+            $this->dados['imagens_portfolio'] = $portfolio->getImagensPorPortfolio($id);
         
-            $this->carregarTemplateEmAdmin('/sistema-adm/forms/formPortfolio', $dados);
+            $this->carregarTemplateEmAdmin('/sistema-adm/forms/formPortfolio', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function excluir($id_portfolio) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_portfolio')) {
+        if($this->usuario->temPermissao('gerenciar_portfolio')) {
             $portfolio = new Portfolio();
 
             $portfolio->excluir($id_portfolio);

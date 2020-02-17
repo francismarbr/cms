@@ -15,7 +15,7 @@
                             <th>E-mail</th>
                             <th>Login</th>
                             <th>Perfil de Acesso</th>
-                            <th>Ação</th>
+                            <th width="150">Ação</th>
                         </tr>
                         <?php foreach($lista_usuarios as $usuario): ?>
                         <tr>

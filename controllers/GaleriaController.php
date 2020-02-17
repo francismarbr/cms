@@ -1,37 +1,37 @@
 <?php
 class GaleriaController extends Controller {
+    
+    private $dados;
+    private $usuario;
+    
     public function __construct() {
-        $usuario = new Usuario();
+        $this->usuario = new Usuario();
+        
         //se o usuário não estiver logado, redireciona para login
-        if($usuario->isLogado() == false) {
+        if($this->usuario->setUsuarioLogado() == false) {
             header("Location: ".BASE_URL."/login");
             exit;
         }
+
+        $this->dados = array(
+            'nome_usuario' => $this->usuario->getNome(),
+            'menu_ativo' => 'galeria',
+            'submenu_ativo' => ''
+        );
     }
 
     public function index() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_galeria')) {
+        if($this->usuario->temPermissao('gerenciar_galeria')) {
             $galeria = new Galeria();
-            $dados['lista_galerias'] = $galeria->getListaGalerias($tipo = "");
-            $this->carregarTemplateEmAdmin('sistema-adm/galeria', $dados);
+            $this->dados['lista_galerias'] = $galeria->getListaGalerias($tipo = "");
+            $this->carregarTemplateEmAdmin('sistema-adm/galeria', $this->dados);
         } else {
             header("Location: ".BASE_URL."/dashboard");
         }
     }
 
     public function inserir() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-        
-
-        if($usuario->temPermissao('gerenciar_galeria')) {
+        if($this->usuario->temPermissao('gerenciar_galeria')) {
             $galeria = new Galeria();
             $formataNome = new FormataNome(); 
 
@@ -59,23 +59,17 @@ class GaleriaController extends Controller {
 
                header("Location: ".BASE_URL."/galeria");
             }
-            $dados['info_galeria'] = array();
-            $dados['imagens_galeria'] = array();
+            $this->dados['info_galeria'] = array();
+            $this->dados['imagens_galeria'] = array();
  
-            $this->carregarTemplateEmAdmin('sistema-adm/forms/formGaleria', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formGaleria', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function editar($id) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-        
-
-        if($usuario->temPermissao('gerenciar_galeria')) {
+        if($this->usuario->temPermissao('gerenciar_galeria')) {
             $galeria = new Galeria();
             $formataNome = new FormataNome(); 
 
@@ -104,22 +98,17 @@ class GaleriaController extends Controller {
                 header("Location: ".BASE_URL."/galeria");
             }
 
-            $dados['info_galeria'] = $galeria->getGaleria($id);
-            $dados['imagens_galeria'] = $galeria->getImagensPorGaleria($id);
+            $this->dados['info_galeria'] = $galeria->getGaleria($id);
+            $this->dados['imagens_galeria'] = $galeria->getImagensPorGaleria($id);
         
-            $this->carregarTemplateEmAdmin('/sistema-adm/forms/formGaleria', $dados);
+            $this->carregarTemplateEmAdmin('/sistema-adm/forms/formGaleria', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function excluir($id_galeria) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_galeria')) {
+        if($this->usuario->temPermissao('gerenciar_galeria')) {
             $galeria = new Galeria();
 
             $galeria->excluir($id_galeria);

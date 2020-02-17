@@ -13,12 +13,14 @@
                         <tr>
                             <th>ID</th>
                             <th>Nome</th>
-                            <th>Ação</th>
+                            <th>Tipo</th>
+                            <th width="150">Ação</th>
                         </tr>
                         <?php foreach($lista_paginas as $pagina): ?>
                         <tr>
                             <td><?php echo $pagina['id']; ?></td>
                             <td><?php echo $pagina['titulo']; ?></td>
+                            <td><?php echo $pagina['tipo']; ?></td>
                             <td>
                               <a href="<?php echo BASE_URL; ?>/pagina/editar/<?php echo $pagina['id']; ?>" class="btn btn-info" 
                                     >Editar</a>

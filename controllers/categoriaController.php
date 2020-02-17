@@ -1,36 +1,37 @@
 <?php
 class CategoriaController extends Controller {
+    
+    private $dados;
+    private $usuario;
+    
     public function __construct() {
-        $usuario = new Usuario();
+        $this->usuario = new Usuario();
+        
         //se o usuário não estiver logado, redireciona para login
-        if($usuario->isLogado() == false) {
+        if($this->usuario->setUsuarioLogado() == false) {
             header("Location: ".BASE_URL."/login");
             exit;
         }
+
+        $this->dados = array(
+            'nome_usuario' => $this->usuario->getNome(),
+            'menu_ativo' => 'conteudo',
+            'submenu_ativo' => 'categoria'
+        );
     }
 
     public function index() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_categorias')) {
+        if($this->usuario->temPermissao('gerenciar_categorias')) {
             $categoria = new Categoria();
-            $dados['lista_categorias'] = $categoria->getListaCategorias(); 
-            $this->carregarTemplateEmAdmin('sistema-adm/categoria', $dados);
+            $this->dados['lista_categorias'] = $categoria->getListaCategorias(); 
+            $this->carregarTemplateEmAdmin('sistema-adm/categoria', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function inserir() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_categorias')) {
+        if($this->usuario->temPermissao('gerenciar_categorias')) {
             $categoria = new Categoria(); 
 
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
@@ -38,20 +39,15 @@ class CategoriaController extends Controller {
                 $categoria->inserir($nome);
                 header("Location: ".BASE_URL."/categoria");
             }
-            $dados['info_categoria'] = array(); //permite que a variável info_categoria exista na view, mas não carrega nenhuma informação 
-            $this->carregarTemplateEmAdmin('sistema-adm/forms/formCategoria', $dados);
+            $this->dados['info_categoria'] = array(); //permite que a variável info_categoria exista na view, mas não carrega nenhuma informação 
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formCategoria', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function editar($id) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_categorias')) {
+        if($this->usuario->temPermissao('gerenciar_categorias')) {
             $categoria = new Categoria(); 
 
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
@@ -60,21 +56,16 @@ class CategoriaController extends Controller {
                 header("Location: ".BASE_URL."/categoria");
             }
 
-            $dados['info_categoria'] = $categoria->getCategoria($id);
+            $this->dados['info_categoria'] = $categoria->getCategoria($id);
 
-            $this->carregarTemplateEmAdmin('sistema-adm/forms/formCategoria', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formCategoria', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function excluir($id_categoria) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_categorias')) {
+        if($this->usuario->temPermissao('gerenciar_categorias')) {
             $categoria = new Categoria();
 
             $categoria->excluir($id_categoria);

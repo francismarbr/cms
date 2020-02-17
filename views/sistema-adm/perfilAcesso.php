@@ -13,7 +13,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Perfil de Acesso</th>
-                            <th>Ação</th>
+                            <th width="150">Ação</th>
                         </tr>
                         <?php foreach($lista_perfis as $perfil): ?>
                         <tr>

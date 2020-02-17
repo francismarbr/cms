@@ -1,37 +1,38 @@
 <?php
 class PerfilAcessoController extends Controller {
+
+    private $dados;
+    private $usuario;
+    
     public function __construct() {
-        $usuario = new Usuario();
+        $this->usuario = new Usuario();
+        
         //se o usuário não estiver logado, redireciona para login
-        if($usuario->isLogado() == false) {
+        if($this->usuario->setUsuarioLogado() == false) {
             header("Location: ".BASE_URL."/login");
             exit;
         }
+
+        $this->dados = array(
+            'nome_usuario' => $this->usuario->getNome(),
+            'menu_ativo' => 'configuracoes',
+            'submenu_ativo' => 'perfilAcesso'
+        );
     }
 
     public function index() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_perfil_acesso')) {
+        if($this->usuario->temPermissao('gerenciar_perfil_acesso')) {
             $perfilAcesso = new PerfilAcesso();
-            $dados['lista_perfis'] = $perfilAcesso->getListaPerfisAcesso(); 
+            $this->dados['lista_perfis'] = $perfilAcesso->getListaPerfisAcesso(); 
 
-            $this->carregarTemplateEmAdmin('sistema-adm/perfilAcesso', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/perfilAcesso', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function inserir() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_perfil_acesso')) {
+        if($this->usuario->temPermissao('gerenciar_perfil_acesso')) {
             $perfilAcesso = new PerfilAcesso (); 
 
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
@@ -43,21 +44,16 @@ class PerfilAcessoController extends Controller {
             
             $permissao = new Permissao();
             //busca todas as permissões disponíveis para serem usadas na view form
-            $dados['lista_permissoes'] = $permissao->getListaPermissoes();
-            $dados['info_perfil'] = array(); //permite que a variável info_perfil exista na view, mas não carrega nenhuma informação 
-            $this->carregarTemplateEmAdmin('sistema-adm/forms/formPerfilAcesso', $dados);
+            $this->dados['lista_permissoes'] = $permissao->getListaPermissoes();
+            $this->dados['info_perfil'] = array(); //permite que a variável info_perfil exista na view, mas não carrega nenhuma informação 
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formPerfilAcesso', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function editar($id) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_perfil_acesso')) {
+        if($this->usuario->temPermissao('gerenciar_perfil_acesso')) {
             $perfilAcesso = new PerfilAcesso (); 
 
             if(isset($_POST['nome']) && !empty($_POST['nome'])){
@@ -68,22 +64,17 @@ class PerfilAcessoController extends Controller {
             }
             
             $permissao = new Permissao();
-            $dados['lista_permissoes'] = $permissao->getListaPermissoes();
-            $dados['info_perfil'] = $perfilAcesso->getPerfilAcesso($id); //armazena informações do grupo a ser editado
+            $this->dados['lista_permissoes'] = $permissao->getListaPermissoes();
+            $this->dados['info_perfil'] = $perfilAcesso->getPerfilAcesso($id); //armazena informações do grupo a ser editado
 
-            $this->carregarTemplateEmAdmin('sistema-adm/forms/formPerfilAcesso', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formPerfilAcesso', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function excluir($id_perfil) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_perfil_acesso')) {
+        if($this->usuario->temPermissao('gerenciar_perfil_acesso')) {
             $perfilAcesso = new PerfilAcesso();
             
             $perfilAcesso->excluir($id_perfil);

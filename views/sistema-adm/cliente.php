@@ -16,7 +16,7 @@
                             <th>Nome</th>
                             <th>E-mail</th>
                             <th>Telefone</th>
-                            <th>Ação</th>
+                            <th width="150">Ação</th>
                         </tr>
                         <?php foreach($lista_clientes as $cliente): ?>
                         <tr>

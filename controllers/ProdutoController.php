@@ -1,37 +1,37 @@
 <?php
 class ProdutoController extends Controller {
+
+    private $dados;
+    private $usuario;
+    
     public function __construct() {
-        $usuario = new Usuario();
+        $this->usuario = new Usuario();
+        
         //se o usuário não estiver logado, redireciona para login
-        if($usuario->isLogado() == false) {
+        if($this->usuario->setUsuarioLogado() == false) {
             header("Location: ".BASE_URL."/login");
             exit;
         }
+
+        $this->dados = array(
+            'nome_usuario' => $this->usuario->getNome(),
+            'menu_ativo' => 'produto',
+            'submenu_ativo' => ''           
+        );
     }
 
     public function index() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_produto')) {
+        if($this->usuario->temPermissao('gerenciar_produto')) {
             $produto = new Produto();
-            $dados['lista_produtos'] = $produto->getListaProdutos($tipo = "");
-            $this->carregarTemplateEmAdmin('sistema-adm/produto', $dados);
+            $this->dados['lista_produtos'] = $produto->getListaProdutos($tipo = "");
+            $this->carregarTemplateEmAdmin('sistema-adm/produto', $this->dados);
         } else {
             header("Location: ".BASE_URL."/dashboard");
         }
     }
 
     public function inserir() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-        
-
-        if($usuario->temPermissao('gerenciar_produto')) {
+        if($this->usuario->temPermissao('gerenciar_produto')) {
             $produto = new Produto();
             $formataNome = new FormataNome(); 
 
@@ -59,23 +59,17 @@ class ProdutoController extends Controller {
 
                 header("Location: ".BASE_URL."/produto");
             }
-            $dados['info_produto'] = array();
-            $dados['imagens_produto'] = array();
+            $this->dados['info_produto'] = array();
+            $this->dados['imagens_produto'] = array();
  
-            $this->carregarTemplateEmAdmin('sistema-adm/forms/formProduto', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/forms/formProduto', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function editar($id) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-        
-
-        if($usuario->temPermissao('gerenciar_produto')) {
+        if($this->usuario->temPermissao('gerenciar_produto')) {
             $produto = new Produto();
             $formataNome = new FormataNome(); 
 
@@ -105,22 +99,17 @@ class ProdutoController extends Controller {
                 header("Location: ".BASE_URL."/produto");
             }
 
-            $dados['info_produto'] = $produto->getProduto($id);
-            $dados['imagens_produto'] = $produto->getImagensPorProduto($id);
+            $this->dados['info_produto'] = $produto->getProduto($id);
+            $this->dados['imagens_produto'] = $produto->getImagensPorProduto($id);
         
-            $this->carregarTemplateEmAdmin('/sistema-adm/forms/formProduto', $dados);
+            $this->carregarTemplateEmAdmin('/sistema-adm/forms/formProduto', $this->dados);
         } else {
             header("Location: ".BASE_URL);
         }
     }
 
     public function excluir($id_produto) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_produto')) {
+        if($this->usuario->temPermissao('gerenciar_produto')) {
             $produto = new Produto();
 
             $produto->excluir($id_produto);

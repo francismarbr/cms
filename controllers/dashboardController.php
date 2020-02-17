@@ -17,6 +17,8 @@ class dashboardController extends Controller {
         $usuario = new Usuario();
         $usuario->setUsuarioLogado(); //busca o usuário logado para pegar suas informações
         $dados['nome_usuario'] = $usuario->getNome();
+        $dados['menu_ativo'] = '';
+        $dados['submenu_ativo']='';
         
         $this->carregarTemplateEmAdmin('sistema-adm/dashboard', $dados);
     }

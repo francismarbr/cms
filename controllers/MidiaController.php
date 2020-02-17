@@ -1,38 +1,39 @@
 <?php
 class MidiaController extends Controller {
+    
+    private $dados;
+    private $usuario;
+    
     public function __construct() {
-        $usuario = new Usuario();
+        $this->usuario = new Usuario();
+        
         //se o usuário não estiver logado, redireciona para login
-        if($usuario->isLogado() == false) {
+        if($this->usuario->setUsuarioLogado() == false) {
             header("Location: ".BASE_URL."/login");
             exit;
         }
+
+        $this->dados = array(
+            'nome_usuario' => $this->usuario->getNome(),
+            'menu_ativo' => 'midia',
+            'submenu_ativo' => ''
+        );
     }
 
     public function index() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_midias')) {
+        if($this->usuario->temPermissao('gerenciar_midias')) {
             $pagina = new Pagina();
-            $dados['lista_paginas'] = $pagina->getListaPaginas($tipo = "");
+            $this->dados['lista_paginas'] = $pagina->getListaPaginas($tipo = "");
+            $this->dados['menu_ativo'] = 'midia';
             
-            $this->carregarTemplateEmAdmin('sistema-adm/midia', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/midia', $this->dados);
         } else {
             header("Location: ".BASE_URL."/dashboard");
         }
     }
 
     public function inserir() {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-        
-
-        if($usuario->temPermissao('gerenciar_midias')) {
+        if($this->usuario->temPermissao('gerenciar_midias')) {
             $midia = new Midia();
             
             $arquivos = array();
@@ -43,10 +44,10 @@ class MidiaController extends Controller {
                 $midia->inserir_multiplos_arquivos($arquivos);
                 
                 header("Location: ".BASE_URL."/midia");
-                $dados['lista_imagens'] = $midia->getListaImagens();
+                $this->dados['lista_imagens'] = $midia->getListaImagens();
             }
 
-            $this->carregarTemplateEmAdmin('sistema-adm/midia', $dados);
+            $this->carregarTemplateEmAdmin('sistema-adm/midia', $this->dados);
 
         } else {
             header("Location: ".BASE_URL);
@@ -54,56 +55,14 @@ class MidiaController extends Controller {
     }
 
     public function editar($id) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
         
-
-        if($usuario->temPermissao('gerenciar_midias')) {
-            $pagina = new Pagina();
-            $categoria = new Categoria(); 
-
-            if(isset($_POST['titulo']) && !empty($_POST['titulo'])){
-                $titulo = addslashes($_POST['titulo']);
-                $imagem_capa = addslashes($_POST['imagem_capa']);
-                $conteudo = addslashes($_POST['conteudo']);
-                $alt_imagem_capa = addslashes($_POST['alt_imagem_capa']);
-                $descricao = addslashes($_POST['descricao']);
-                $slug = addslashes($_POST['slug']);
-                $tipo = addslashes($_POST['tipo']);
-                $id_categoria = $_POST['categoria'];
-                $pagina->editar($id, $titulo, $imagem_capa, $conteudo, $alt_imagem_capa, $descricao, $slug, $tipo, $id_categoria);
-                
-                header("Location: ".BASE_URL."/pagina");
-            }
-
-            $dados['info_pagina'] = $pagina->getPagina($id);
-            $dados['lista_categorias'] = $categoria->getListaCategorias(); 
-            $this->carregarTemplateEmAdmin('/sistema-adm/forms/formPagina', $dados);
-        } else {
-            header("Location: ".BASE_URL);
-        }
     }
 
-    public function excluir($id_pagina) {
-        $dados = array();
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado();
-        $dados['nome_usuario'] = $usuario->getNome();
-
-        if($usuario->temPermissao('gerenciar_midias')) {
-            $pagina = new Pagina();
-
-            $pagina->excluir($id_pagina);
-            header("Location: ".BASE_URL."/pagina");
-        } else {
-            header("Location: ".BASE_URL);
-        }
+    public function excluir($id_midia) {
+        
     }
 
     public function upload_tinymce() {
-        
         if(!empty($_FILES['file']['tmp_name'])) {
             $midia = new Midia();
             $nome_imagem = $midia->inserir_arquivo_unico($_FILES['file']);
