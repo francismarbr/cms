@@ -121,6 +121,12 @@
             </a>
           </li>
 
+          <li class="<?php echo ($menu_ativo == 'profissional') ? 'active' :''; ?>">
+            <a href="<?php echo BASE_URL; ?>/profissional">
+              <i class="fa fa-user-circle-o"></i> <span>Profissional</span>
+            </a>
+          </li>
+
           <li class="<?php echo ($menu_ativo == 'portfolio') ? 'active' :''; ?>">
             <a href="<?php echo BASE_URL; ?>/portfolio">
               <i class="fa fa-cubes"></i> <span>Portfólio</span>
@@ -146,7 +152,7 @@
 
               <li <?php echo ($submenu_ativo == 'permissao') ? 'class="active"'  :''; ?>><a href="<?php echo BASE_URL; ?>/permissao"><i class="fa fa-key"></i>Permissões</a></li>
 
-              <li <?php echo ($submenu_ativo == 'usuario') ? 'class="active"'  :''; ?>><a href="<?php echo BASE_URL; ?>/usuario"><i class="fa fa-user-circle-o"></i>Usuários</a></li>
+              <li <?php echo ($submenu_ativo == 'usuario') ? 'class="active"'  :''; ?>><a href="<?php echo BASE_URL; ?>/usuario"><i class="fa fa-users"></i>Usuários</a></li>
             </ul>
           </li>
 
