@@ -35,7 +35,7 @@
 
                 <div class="col-md-4">
                   <div class="form-group">
-                      <label for="alt_imagem_capa">Descrição Img Capa</label>
+                      <label for="alt_imagem_capa">Descrição da foto</label>
                       <input type ="text" name="alt_imagem_capa" class="form-control" id="alt_imagem_capa" 
                         value="<?php echo (!empty($info_profissional['id'])) ? $info_profissional['alt_imagem_capa'] : ''; ?>">
                   </div>

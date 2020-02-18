@@ -1,25 +1,26 @@
 <?php
 class dashboardController extends Controller {
 
+    private $dados;
+    private $usuario;
+    
     public function __construct() {
-       
-        $usuario = new Usuario();
+        $this->usuario = new Usuario();
+        
         //se o usuário não estiver logado, redireciona para login
-        if($usuario->isLogado() == false) {
+        if($this->usuario->setUsuarioLogado() == false) {
             header("Location: ".BASE_URL."/login");
             exit;
         }
+
+        $this->dados = array(
+            'nome_usuario' => $this->usuario->getNome(),
+            'menu_ativo' => 'dashboard',
+            'submenu_ativo' => ''           
+        );
     }
 
-    public function index() {
-        $dados = array();
-
-        $usuario = new Usuario();
-        $usuario->setUsuarioLogado(); //busca o usuário logado para pegar suas informações
-        $dados['nome_usuario'] = $usuario->getNome();
-        $dados['menu_ativo'] = '';
-        $dados['submenu_ativo']='';
-        
-        $this->carregarTemplateEmAdmin('sistema-adm/dashboard', $dados);
+    public function index() {      
+        $this->carregarTemplateEmAdmin('sistema-adm/dashboard', $this->dados);
     }
 }

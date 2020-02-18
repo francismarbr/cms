@@ -15,7 +15,7 @@ class Profissional extends Model {
             $sql->bindValue(":cargo", $cargo);
             $sql->execute();
         } catch(PDOException $e) {
-            echo "Não foi possível inserir porfólio! ".$e->getMessage(); exit;
+            echo "Não foi possível inserir profissional! ".$e->getMessage(); exit;
         }
     }
     

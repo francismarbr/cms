@@ -78,7 +78,7 @@
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         
-        <li>
+        <li class="<?php echo ($menu_ativo == 'dashboard') ? 'active' :''; ?>">
           <a href="<?php echo BASE_URL; ?>/dashboard">
             <i class="fa fa-dashboard"></i> <span>DASHBOARD</span>
           </a>
@@ -112,6 +112,12 @@
           <li class="<?php echo ($menu_ativo == 'produto') ? 'active' :''; ?>">
             <a href="<?php echo BASE_URL; ?>/produto">
               <i class="fa fa-cube"></i> <span>Produtos</span>
+            </a>
+          </li>
+
+          <li class="<?php echo ($menu_ativo == 'servico') ? 'active' :''; ?>">
+            <a href="<?php echo BASE_URL; ?>/servico">
+              <i class="fa fa-tasks"></i> <span>Serviços</span>
             </a>
           </li>
 
