@@ -1,5 +1,5 @@
 <?php
-class dashboardController extends Controller {
+class DashboardController extends Controller {
 
     private $dados;
     private $usuario;

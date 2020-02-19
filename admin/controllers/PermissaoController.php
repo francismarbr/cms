@@ -1,5 +1,5 @@
 <?php
-class permissaoController extends Controller {
+class PermissaoController extends Controller {
     
     private $dados;
     private $usuario;
