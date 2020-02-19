@@ -4,13 +4,15 @@
     $config = array();
 
     if(AMBIENTE == 'desenvolvimento') {
-        define("BASE_URL", "http://localhost/sistemagestao");
+        define("URL_RAIZ", "http://localhost/sistemagestao");
+        define("URL_CMS", "http://localhost/sistemagestao/admin");
         $config['dbname'] = 'sistemag';
         $config['host'] = "localhost";
         $config['dbusuario'] = 'root';
         $config['dbsenha'] = "1405";
     } else {
-        define("BASE_URL", "http://localhost/sistemagestao");
+        define("URL_RAIZ", "http://localhost/sistemagestao");
+        define("URL_CMS", "http://localhost/sistemagestao/admin");
         $config['dbname'] = 'sistemag';
         $config['host'] = "localhost";
         $config['dbusuario'] = 'root';
